@@ -25,7 +25,7 @@ def size_of_tumor():
     assessed = input("can the tumor be assessed?(y/n) ")
     if assessed == 'n':
         return t_suffix(definition), float(size)
-    size = input("What is the size of the tumor: ")
+    size = input("What is the size of the tumor in mm?: ")
     if float(size) <= 1.0:
         definition = "T1mi"
     elif 1.0 < float(size) <= 5.0:
@@ -62,6 +62,12 @@ def size_of_tumor():
     return t_suffix(definition), float(size)
 
 
+def clinicalLymphNode():
+    category = "cNX"
+
+    return category
+
+
 if __name__ == '__main__':
     classification = input("Is it clinical(C) or pathological(P): ")
     classification.lower()
@@ -74,5 +80,17 @@ if __name__ == '__main__':
         clinical_def()
     elif classification == 'p':
         pathological_def()
+    Nvalue = input("please input the lymphNode value: ")
+    metastasis = input("please input the metastasis value: ")
+    grade = input('please input the grade (G1, G2, G3): ')
+    HER2 = input('please input the HER2 (+/-): ')
+    ER = input('please input the ER (+/-): ')
+    PR = input('please input the PR (+/-): ')
     # final classification will be as such: [T, N, M, G, HER2, ER, PR]
-    print("Your final classification is a: " + classification + s)
+    if s.__contains__("T1"):
+        s = "T1"
+
+    to_calculate = (s, Nvalue, metastasis, grade, HER2, ER, PR)
+    stage = stagingPathological.get(to_calculate, "0")
+    print("Your final classification is a: " + classification + s + Nvalue + metastasis + grade
+          + HER2 + ER + PR + " which means you are at a stage: " + stage)
