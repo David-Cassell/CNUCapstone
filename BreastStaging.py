@@ -89,8 +89,10 @@ if __name__ == '__main__':
     # final classification will be as such: [T, N, M, G, HER2, ER, PR]
     if s.__contains__("T1"):
         s = "T1"
-
-    to_calculate = (s, Nvalue, metastasis, grade, HER2, ER, PR)
-    stage = stagingPathological.get(to_calculate, "0")
+    if metastasis != "M1":
+        to_calculate = (s, Nvalue, metastasis, grade, HER2, ER, PR)
+        stage = stagingPathological.get(to_calculate, "0")
+    else:
+        stage = "IV"
     print("Your final classification is a: " + classification + s + Nvalue + metastasis + grade
           + HER2 + ER + PR + " which means you are at a stage: " + stage)
