@@ -1,6 +1,4 @@
-stagingPathological = {}
-stagingClinical = {}
-
+stagingDictionary = {}
 
 def clinical_def():
     return 0
@@ -68,6 +66,14 @@ def clinical_lymph_node():
     return category
 
 
+def input_into_database():
+    pass
+
+
+def read_in(fileToRead):
+    pass
+
+
 if __name__ == '__main__':
     classification = input("Is it clinical(C) or pathological(P): ")
     classification.lower()
@@ -77,8 +83,10 @@ if __name__ == '__main__':
     if 1.9 >= float(h) > 1.0:
         h = "2"
     if classification == 'c':
+        read_in("clinicalStaging.txt")
         clinical_def()
     elif classification == 'p':
+        read_in("pathologicalStaging.txt")
         pathological_def()
     Nvalue = input("please input the lymphNode value: ")
     metastasis = input("please input the metastasis value: ")
@@ -87,14 +95,16 @@ if __name__ == '__main__':
     ER = input('please input the ER (+/-): ')
     PR = input('please input the PR (+/-): ')
     # final classification will be as such: [T, N, M, G, HER2, ER, PR]
-    if T_value.__contains__("T1"):
+    if T_value.__contains__("T1") or T_value.__contains__("T4"):
         T_value = "T1"
     if metastasis != "M1":
         if Nvalue == "N3":
             T_value = "T"
         to_calculate = (T_value, Nvalue, metastasis, grade, HER2, ER, PR)
-        stage = stagingPathological.get(to_calculate, "0")
+        stage = stagingDictionary.get(to_calculate, "0")
     else:
         stage = "IV"
+
+    input_into_database()
     print("Your final classification is a: " + classification + T_value + Nvalue + metastasis + grade
           + HER2 + ER + PR + " which means you are at a stage: " + stage)
