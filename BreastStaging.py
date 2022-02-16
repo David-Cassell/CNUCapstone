@@ -103,7 +103,7 @@ if __name__ == '__main__':
     ER = input('please input the ER (+/-): ')
     PR = input('please input the PR (+/-): ')
     # final classification will be as such: [T, N, M, G, HER2, ER, PR]
-    if T_value.__contains__("T1") or T_value.__contains__("T4"):
+    if T_value.__contains__("T1"):
         T_value = "T1"
     if metastasis != "M1":
         if Nvalue == "N3":
