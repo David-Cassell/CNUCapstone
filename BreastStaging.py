@@ -71,23 +71,31 @@ def input_into_database():
 
 
 def read_in(fileToRead):
-    pass
+    file = open(fileToRead, encoding="utf-8")
+
+    for line in file:
+        dictStage = line.split(":")
+        stagingDictionary.update({dictStage[0]: dictStage[1]})
+
+    #print(len(stagingDictionary))
+    file.close()
 
 
 if __name__ == '__main__':
     classification = input("Is it clinical(C) or pathological(P): ")
     classification.lower()
-    g = size_of_tumor()
-    T_value = g[0]
-    h = g[1]
-    if 1.9 >= float(h) > 1.0:
-        h = "2"
     if classification == 'c':
         read_in("clinicalStaging.txt")
         clinical_def()
     elif classification == 'p':
         read_in("pathologicalStaging.txt")
         pathological_def()
+    g = size_of_tumor()
+    T_value = g[0]
+    h = g[1]
+    if 1.9 >= float(h) > 1.0:
+        h = "2"
+    to_calculate = " "
     Nvalue = input("please input the lymphNode value: ")
     metastasis = input("please input the metastasis value: ")
     grade = input('please input the grade (G1, G2, G3): ')
@@ -100,11 +108,13 @@ if __name__ == '__main__':
     if metastasis != "M1":
         if Nvalue == "N3":
             T_value = "T"
-        to_calculate = (T_value, Nvalue, metastasis, grade, HER2, ER, PR)
+        to_calculate = T_value+Nvalue+metastasis+grade+HER2+ER+PR
+        print(to_calculate)
         stage = stagingDictionary.get(to_calculate, "0")
+        print(stage)
     else:
         stage = "IV"
 
     input_into_database()
-    print("Your final classification is a: " + classification + T_value + Nvalue + metastasis + grade
-          + HER2 + ER + PR + " which means you are at a stage: " + stage)
+    print("Your final classification is a: " + classification + to_calculate
+          + " which means you are at a stage: " + stage)
