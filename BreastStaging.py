@@ -109,9 +109,9 @@ if __name__ == '__main__':
         if Nvalue == "N3":
             T_value = "T"
         to_calculate = T_value+Nvalue+metastasis+grade+HER2+ER+PR
-        print(to_calculate)
+        # print(to_calculate)
         stage = stagingDictionary.get(to_calculate, "0")
-        print(stage)
+        # print(stage)
     else:
         stage = "IV"
 
