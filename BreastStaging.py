@@ -1,11 +1,32 @@
 stagingDictionary = {}
 
-def clinical_def():
-    return 0
+
+def clinical_lymph_def():
+    category = "NX"
+    assessed = input("can the lymph nodes be assessed (y/n)?")
+    if assessed == "n":
+        return category
+    are_they_there = input("Has there been any presence of a lymph node metastasis by "
+                           "either imaging or clinical examination(y/n)?")
+    if are_they_there == "n":
+        category = "N0"
+        return category
+
+    check_if_n1 = input("Is the metastasis movable ipsilateral in Level I or II axillary lymph nodes (y/n)?")
+    if check_if_n1 == "y":
+        category = "N1"
+        check_mi = input("Are there any micrometastises (around 200 cells but none larger than 2mm) (y/n)?")
+        if check_mi == "y":
+            category = "N1mi"
+        return category
+
+    return category
 
 
-def pathological_def():
-    return 0
+def pathological_lymph_def():
+    category = "NX"
+
+    return category
 
 
 def t_suffix(definition):
@@ -60,12 +81,6 @@ def size_of_tumor():
     return t_suffix(definition), float(size)
 
 
-def clinical_lymph_node():
-    category = "cNX"
-
-    return category
-
-
 def input_into_database():
     pass
 
@@ -76,27 +91,25 @@ def read_in(fileToRead):
     for line in file:
         dictStage = line.split(":")
         stagingDictionary.update({dictStage[0]: dictStage[1]})
-
-    #print(len(stagingDictionary))
     file.close()
 
 
 if __name__ == '__main__':
     classification = input("Is it clinical(C) or pathological(P): ")
     classification.lower()
+    Nvalue = " "
     if classification == 'c':
-        read_in("clinicalStaging.txt")
-        clinical_def()
+        read_in("clinicalBreastStaging.txt")
+        Nvalue = clinical_lymph_def()
     elif classification == 'p':
-        read_in("pathologicalStaging.txt")
-        pathological_def()
+        read_in("pathologicalBreastStaging.txt")
+        Nvalue = pathological_lymph_def()
     g = size_of_tumor()
     T_value = g[0]
-    h = g[1]
-    if 1.9 >= float(h) > 1.0:
-        h = "2"
+    final_size = g[1]
+    if 1.9 >= float(final_size) > 1.0:
+        final_size = "2"
     to_calculate = " "
-    Nvalue = input("please input the lymphNode value: ")
     metastasis = input("please input the metastasis value: ")
     grade = input('please input the grade (G1, G2, G3): ')
     HER2 = input('please input the HER2 (+/-): ')
@@ -108,7 +121,7 @@ if __name__ == '__main__':
     if metastasis != "M1":
         if Nvalue == "N3":
             T_value = "T"
-        to_calculate = T_value+Nvalue+metastasis+grade+HER2+ER+PR
+        to_calculate = T_value + Nvalue + metastasis + grade + HER2 + ER + PR
         # print(to_calculate)
         stage = stagingDictionary.get(to_calculate, "0")
         # print(stage)
