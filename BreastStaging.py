@@ -94,7 +94,25 @@ def read_in(fileToRead):
     file.close()
 
 
+def location_code():
+    value = input("where is the location on the breast? /n"
+                  "Examples include: Upper Inner (UI), Lower Inner (LI), Upper Outer (UO), Lower Outer (LO) /n"
+                  "or Upper Middle (UM), Lower Middle (LM), Right Middle (RM), Left Middle (LM) /n"
+                  "or is it on the nipple (n).")
+    value.lower()
+    if value == 'ui':
+        return "50.2"
+    elif value == 'li':
+        return "50.3"
+    elif value == 'uo':
+        return "50.4"
+    elif value == 'lo':
+        return "50.5"
+
+
+
 if __name__ == '__main__':
+    location_code()
     classification = input("Is it clinical(C) or pathological(P): ")
     classification.lower()
     Nvalue = " "
@@ -111,6 +129,7 @@ if __name__ == '__main__':
         final_size = "2"
     to_calculate = " "
     metastasis = input("please input the metastasis value: ")
+    metastasis[0].upper()
     grade = input('please input the grade (G1, G2, G3): ')
     HER2 = input('please input the HER2 (+/-): ')
     ER = input('please input the ER (+/-): ')
