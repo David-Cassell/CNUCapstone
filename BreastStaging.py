@@ -1,3 +1,7 @@
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
 stagingDictionary = {}
 
 
@@ -110,43 +114,48 @@ def location_code():
         return "50.5"
 
 
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    return render_template('index.html')
+
 
 if __name__ == '__main__':
+    app.run()
     location_code()
-    classification = input("Is it clinical(C) or pathological(P): ")
-    classification.lower()
-    Nvalue = " "
-    if classification == 'c':
-        read_in("clinicalBreastStaging.txt")
-        Nvalue = clinical_lymph_def()
-    elif classification == 'p':
-        read_in("pathologicalBreastStaging.txt")
-        Nvalue = pathological_lymph_def()
-    g = size_of_tumor()
-    T_value = g[0]
-    final_size = g[1]
-    if 1.9 >= float(final_size) > 1.0:
-        final_size = "2"
-    to_calculate = " "
-    metastasis = input("please input the metastasis value: ")
-    metastasis[0].upper()
-    grade = input('please input the grade (G1, G2, G3): ')
-    HER2 = input('please input the HER2 (+/-): ')
-    ER = input('please input the ER (+/-): ')
-    PR = input('please input the PR (+/-): ')
+    # classification = input("Is it clinical(C) or pathological(P): ")
+    # classification.lower()
+    # Nvalue = " "
+    # if classification == 'c':
+    #   read_in("clinicalBreastStaging.txt")
+    #  Nvalue = clinical_lymph_def()
+    # elif classification == 'p':
+    #   read_in("pathologicalBreastStaging.txt")
+    #  Nvalue = pathological_lymph_def()
+    # g = size_of_tumor()
+    # T_value = g[0]
+    # final_size = g[1]
+    # if 1.9 >= float(final_size) > 1.0:
+    #    final_size = "2"
+    # to_calculate = " "
+    # metastasis = input("please input the metastasis value: ")
+    # metastasis[0].upper()
+    # grade = input('please input the grade (G1, G2, G3): ')
+    # HER2 = input('please input the HER2 (+/-): ')
+    # ER = input('please input the ER (+/-): ')
+    # PR = input('please input the PR (+/-): ')
     # final classification will be as such: [T, N, M, G, HER2, ER, PR]
-    if T_value.__contains__("T1"):
-        T_value = "T1"
-    if metastasis != "M1":
-        if Nvalue == "N3":
-            T_value = "T"
-        to_calculate = T_value + Nvalue + metastasis + grade + HER2 + ER + PR
-        # print(to_calculate)
-        stage = stagingDictionary.get(to_calculate, "0")
-        # print(stage)
-    else:
-        stage = "IV"
+    # if T_value.__contains__("T1"):
+    #    T_value = "T1"
+    # if metastasis != "M1":
+    #    if Nvalue == "N3":
+    #        T_value = "T"
+    #    to_calculate = T_value + Nvalue + metastasis + grade + HER2 + ER + PR
+    # print(to_calculate)
+    #    stage = stagingDictionary.get(to_calculate, "0")
+    # print(stage)
+    # else:
+    #    stage = "IV"
 
-    input_into_database()
-    print("Your final classification is a: " + classification + to_calculate
-          + " which means you are at a stage: " + stage)
+    # input_into_database()
+    # print("Your final classification is a: " + classification + to_calculate
+    #      + " which means you are at a stage: " + stage)
