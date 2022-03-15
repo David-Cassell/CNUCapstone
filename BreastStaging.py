@@ -121,7 +121,7 @@ def home():
 
 if __name__ == '__main__':
     app.run()
-    location_code()
+    # location_code()
     # classification = input("Is it clinical(C) or pathological(P): ")
     # classification.lower()
     # Nvalue = " "
