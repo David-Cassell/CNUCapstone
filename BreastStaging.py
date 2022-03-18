@@ -10,19 +10,19 @@ def clinical_lymph_def():
     assessed = input("can the lymph nodes be assessed (y/n)?")
     if assessed == "n":
         return category
-    are_they_there = input("Has there been any presence of a lymph node metastasis by "
-                           "either imaging or clinical examination(y/n)?")
-    if are_they_there == "n":
-        category = "N0"
-        return category
+    #are_they_there = input("Has there been any presence of a lymph node metastasis by "
+                           #"either imaging or clinical examination(y/n)?")
+    #if are_they_there == "n":
+        #category = "N0"
+        #return category
 
-    check_if_n1 = input("Is the metastasis movable ipsilateral in Level I or II axillary lymph nodes (y/n)?")
-    if check_if_n1 == "y":
-        category = "N1"
-        check_mi = input("Are there any micrometastises (around 200 cells but none larger than 2mm) (y/n)?")
-        if check_mi == "y":
-            category = "N1mi"
-        return category
+    #check_if_n1 = input("Is the metastasis movable ipsilateral in Level I or II axillary lymph nodes (y/n)?")
+    #if check_if_n1 == "y":
+        #category = "N1"
+        #check_mi = input("Are there any micrometastises (around 200 cells but none larger than 2mm) (y/n)?")
+        #if check_mi == "y":
+            #category = "N1mi"
+        #return category
 
     return category
 
