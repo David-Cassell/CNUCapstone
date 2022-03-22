@@ -1,7 +1,3 @@
-from flask import Flask, render_template
-
-app = Flask(__name__)
-
 stagingDictionary = {}
 
 
@@ -114,11 +110,8 @@ def location_code():
         return "50.5"
 
 
-
-
-
 if __name__ == '__main__':
-    app.run()
+    pass
     # location_code()
     # classification = input("Is it clinical(C) or pathological(P): ")
     # classification.lower()
