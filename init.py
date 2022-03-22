@@ -22,7 +22,8 @@ def bladder():
     if request.method == 'POST':
         print(request.form)
         requestDict = request.form
-        StagingPythonFiles.BladderStaging.getValues(requestDict)
+        stage = StagingPythonFiles.BladderStaging.getValues(requestDict)
+        return stage
 
 
 

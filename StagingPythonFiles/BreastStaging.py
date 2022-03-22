@@ -1,6 +1,7 @@
 stagingDictionary = {}
 
-
+clinical_path = r'stagingTextFiles\clinicalBreastStaging.txt'
+pathological_path = r'stagingTextFiles\pathologicalBreastStaging.txt'
 def clinical_lymph_def():
     category = "NX"
     assessed = input("can the lymph nodes be assessed (y/n)?")
