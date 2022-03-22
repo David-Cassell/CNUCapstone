@@ -5,12 +5,16 @@
     <title>About Me</title>
 </head>
 <body>
+<nav>
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('aboutMe') }}">About</a>
+</nav>
     <div>This will just hold links to other pages right now</div>
 
-    <a href="bladder.html">Bladder</a>
-<a href="colon.html">Colon</a>
-<a href="index.html">Breast</a>
-<a href="Lung.html">Lung</a>
-<a href="prostate.html">Prostate</a>
+<a href="{{ url_for('bladder') }}">Bladder</a>
+<a href="{{ url_for('colon') }}">Colon</a>
+<a href="{{ url_for('breast') }}">Breast</a>
+<a href="{{ url_for('lung') }}">Lung</a>
+<a href="{{ url_for('prostate') }}">Prostate</a>
 </body>
 </html>

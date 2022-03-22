@@ -2,6 +2,15 @@
 <html>
 
   <body>
+  <nav>
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('aboutMe') }}">About</a>
+</nav>
+<a href="{{ url_for('bladder') }}">Bladder</a>
+<a href="{{ url_for('colon') }}">Colon</a>
+<a href="{{ url_for('breast') }}">Breast</a>
+<a href="{{ url_for('lung') }}">Lung</a>
+<a href="{{ url_for('prostate') }}">Prostate</a>
     <div>
       <h1>You are currently coding a Breast Cancer Cell</h1>
       <form id="type" method="POST">
