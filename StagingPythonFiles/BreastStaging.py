@@ -114,9 +114,7 @@ def location_code():
         return "50.5"
 
 
-@app.route('/', methods=['GET', 'POST'])
-def home():
-    return render_template('index.html')
+
 
 
 if __name__ == '__main__':
