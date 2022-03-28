@@ -2,7 +2,6 @@ stagingDictionary = {}
 
 path = r'stagingTextFiles\bladderStaging.txt'
 def getValues(requestDict):
-    #print("This triggered")
     Tvalue = requestDict.get('T-Value')
     Mvalue = requestDict.get('Metas')
     Nvalue = requestDict.get('Lymph')

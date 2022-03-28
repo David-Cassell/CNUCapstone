@@ -23,15 +23,15 @@
         <input type="radio" name="type" id="path" value="p">
         <label for="path">Pathological</label><br>
 
-
-
         <label for="T-Value">T-Value:</label><br>
-        <input type="text" id="T-Value" name="T-Value" placeholder="Size of the Tumor"><br>
+        <input type="text" id="T-Value" name="T-Value" placeholder="Size of the Tumor in millimeters"><br>
         <input type="checkbox" name="chest" value="chest-intrusion" id="chest-intrusion">
         <label for="chest-intrusion">Chest Intrusion</label>
-        <input type="checkbox" name="T-value" value="skin-intrusion" id="skin-intrusion">
+        <input type="checkbox" name="skin" value="skin-intrusion" id="skin-intrusion">
         <label for="skin-intrusion">Skin intrusion</label>
-        <input type="checkbox" name="T-value" value="suffix" id="suffix">
+        <input type="checkbox" name="infla" value="infla" id="infla">
+        <label for="infla">Inflammatory Carcinoma</label>
+        <input type="checkbox" name="suffix" value="suffix" id="suffix">
         <label for="suffix">Any synchronous tumors found in a single organ</label>
         <br>
 
@@ -72,7 +72,7 @@
           <option value="NX">Regional lymph Nodes cannot be assessed</option>
           <option value="N0">No regional lymph node metastasis identified or ITCs only</option>
           <option value="N0">ITcs only (malignant cell clusters nor larger than 0.2mm) in regional lymph nodes</option>
-          <option value="N0">Positive molecular findings by findings by reverse transcriptase polymerase chain reaction;
+          <option value="N0">Positive molecular findings by reverse transcriptase polymerase chain reaction;
             no ITCs detected</option>
           <option value="N1">Micrometastases; or metastases in 1-3 axillary lymph nodes; and/or clinically negative internal
           mammary nodes with micrometastases or macrometastases by sentinel lymph node biopsy</option>

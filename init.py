@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
-
-import StagingPythonFiles.BladderStaging
+from StagingPythonFiles import BladderStaging, BreastStaging, ColonStaging, LungStaging, ProstateStaging
 
 app = Flask(__name__)
 
@@ -22,10 +21,8 @@ def bladder():
     if request.method == 'POST':
         print(request.form)
         requestDict = request.form
-        stage = StagingPythonFiles.BladderStaging.getValues(requestDict)
+        stage = BladderStaging.getValues(requestDict)
         return stage
-
-
 
     return render_template('bladder.html')
 
@@ -35,23 +32,38 @@ def breast():
     if request.method == 'POST':
         print(request.form)
         requestDict = request.form
-        stage = StagingPythonFiles.BreastStaging.getValues(requestDict)
+        stage = BreastStaging.getValues(requestDict)
         return stage
     return render_template('breast.html')
 
 
 @app.route('/colon', methods=['GET','POST'])
 def colon():
+    if request.method == 'POST':
+        print(request.form)
+        requestDict = request.form
+        stage = ColonStaging.getValues(requestDict)
+        return stage
     return render_template('colon.html')
 
 
 @app.route('/lung', methods=['GET','POST'])
 def lung():
+    if request.method == 'POST':
+        print(request.form)
+        requestDict = request.form
+        stage = LungStaging.getValues(requestDict)
+        return stage
     return render_template('lung.html')
 
 
 @app.route('/prostate', methods=['GET','POST'])
 def prostate():
+    if request.method == 'POST':
+        print(request.form)
+        requestDict = request.form
+        stage = ProstateStaging.getValues(requestDict)
+        return stage
     return render_template('prostate.html')
 
 

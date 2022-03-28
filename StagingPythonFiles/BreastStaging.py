@@ -1,56 +1,47 @@
 stagingDictionary = {}
 
+#from stagingTextFiles import
 clinical_path = r'stagingTextFiles\clinicalBreastStaging.txt'
 pathological_path = r'stagingTextFiles\pathologicalBreastStaging.txt'
 
+
 def getValues(requestDict):
     size = requestDict.get("T-Value")
-    chest = ""
-    try:
-        chest += requestDict.get("chest-intrusion")
-    except(RuntimeError):
-        chest += "-"
-    print(chest)
-    return chest
+    if "chest" in requestDict:
+        chest = "y"
+    else:
+        chest = "n"
 
-def clinical_lymph_def():
-    category = "NX"
-    assessed = input("can the lymph nodes be assessed (y/n)?")
-    if assessed == "n":
-        return category
-    #are_they_there = input("Has there been any presence of a lymph node metastasis by "
-                           #"either imaging or clinical examination(y/n)?")
-    #if are_they_there == "n":
-        #category = "N0"
-        #return category
+    if "skin" in requestDict:
+        skin = "y"
+    else:
+        skin = "n"
 
-    #check_if_n1 = input("Is the metastasis movable ipsilateral in Level I or II axillary lymph nodes (y/n)?")
-    #if check_if_n1 == "y":
-        #category = "N1"
-        #check_mi = input("Are there any micrometastises (around 200 cells but none larger than 2mm) (y/n)?")
-        #if check_mi == "y":
-            #category = "N1mi"
-        #return category
+    if "suffix" in requestDict:
+        suffix = "pos"
+    else:
+        suffix = "neg"
 
-    return category
-
-
-def pathological_lymph_def():
-    category = "NX"
-
-    return category
+    if "infla" in requestDict:
+        infla = "y"
+    else:
+        infla = "n"
+    tvalue = size_of_tumor(size, chest, skin, infla)
+    classification = requestDict.get('type')
+    if classification == 'c':
+        nvalue = requestDict.get('Clin-Lymph')
+    else:
+        nvalue = requestDict.get('path-Lymph')
+    mets = requestDict.get('Metas')
+    grade = requestDict.get('Grade')
+    HER2 = requestDict.get('Her2')
+    ER = requestDict.get('Er')
+    PR = requestDict.get('Pr')
+    stage = calculate(classification,tvalue,nvalue, mets,grade,HER2, ER, PR)
+    return stage
 
 
-def t_suffix(definition):
-    # not worrying about the suffix yet
-    # var = input("Are there synchronous tumors found in a single organ?(y/n) ")
-    # var.lower()
-    # if var == "y":
-    # return definition+" suffix(m)"
-    return definition
-
-
-def size_of_tumor(size):
+def size_of_tumor(size, chest, skin, infla):
     definition = "TX"
     if float(size) <= 1.0:
         definition = "T1mi"
@@ -65,27 +56,25 @@ def size_of_tumor(size):
     elif float(size) > 50.0:
         definition = "T3"
 
-    isTFour = input("Does the tumor directly extend to into the chest wall and/or the skin?(y/n) ")
-    if isTFour == "n":
-        return t_suffix(definition), float(size)
+    if chest == "y" and skin == 'n':
+        return definition
     else:
         definition = "T4"
-        isTA = input("Does it extend into the chest wall?(y/n) ")
-        isTB = input("Does it extend into the skin?(y/n) ")
+        isTA = chest
+        isTB = skin
         if isTA == 'y' and isTB == 'n':
-            return t_suffix("T4a"), float(size)
+            return "T4a"
 
         elif isTA == 'n' and isTB == 'y':
-            return t_suffix("T4b"), float(size)
+            return "T4b"
 
         elif isTA == 'y' and isTB == 'y':
-            return t_suffix("T4c"), float(size)
+            return "T4c"
 
-        isTD = input("is it an inflammatory carcinoma?")
-        if isTD == 'y':
-            return t_suffix("T4d"), float(size)
+        if infla == 'y':
+            return "T4d"
 
-    return t_suffix(definition), float(size)
+    return definition
 
 
 def input_into_database():
@@ -101,59 +90,28 @@ def read_in(fileToRead):
     file.close()
 
 
-def location_code():
-    value = input("where is the location on the breast? /n"
-                  "Examples include: Upper Inner (UI), Lower Inner (LI), Upper Outer (UO), Lower Outer (LO) /n"
-                  "or Upper Middle (UM), Lower Middle (LM), Right Middle (RM), Left Middle (LM) /n"
-                  "or is it on the nipple (n).")
-    value.lower()
-    if value == 'ui':
-        return "50.2"
-    elif value == 'li':
-        return "50.3"
-    elif value == 'uo':
-        return "50.4"
-    elif value == 'lo':
-        return "50.5"
-
-
-if __name__ == '__main__':
+def calculate(classification, T_value, Nvalue, metastasis, grade, HER2, ER, PR):
     pass
-    # location_code()
-    # classification = input("Is it clinical(C) or pathological(P): ")
-    # classification.lower()
-    # Nvalue = " "
-    # if classification == 'c':
-    #   read_in("clinicalBreastStaging.txt")
-    #  Nvalue = clinical_lymph_def()
-    # elif classification == 'p':
-    #   read_in("pathologicalBreastStaging.txt")
-    #  Nvalue = pathological_lymph_def()
-    # g = size_of_tumor()
-    # T_value = g[0]
-    # final_size = g[1]
-    # if 1.9 >= float(final_size) > 1.0:
-    #    final_size = "2"
-    # to_calculate = " "
-    # metastasis = input("please input the metastasis value: ")
-    # metastasis[0].upper()
-    # grade = input('please input the grade (G1, G2, G3): ')
-    # HER2 = input('please input the HER2 (+/-): ')
-    # ER = input('please input the ER (+/-): ')
-    # PR = input('please input the PR (+/-): ')
-    # final classification will be as such: [T, N, M, G, HER2, ER, PR]
-    # if T_value.__contains__("T1"):
-    #    T_value = "T1"
-    # if metastasis != "M1":
-    #    if Nvalue == "N3":
-    #        T_value = "T"
-    #    to_calculate = T_value + Nvalue + metastasis + grade + HER2 + ER + PR
-    # print(to_calculate)
-    #    stage = stagingDictionary.get(to_calculate, "0")
-    # print(stage)
-    # else:
-    #    stage = "IV"
 
+    if classification == 'c':
+        read_in("clinicalBreastStaging.txt")
+    elif classification == 'p':
+        read_in("pathologicalBreastStaging.txt")
+
+    to_calculate = " "
+    # final classification will be as such: [T, N, M, G, HER2, ER, PR]
+    if T_value.__contains__("T1"):
+        T_value = "T1"
+    if metastasis != "M1":
+        if Nvalue == "N3":
+            T_value = "T"
+        to_calculate = T_value + Nvalue + metastasis + grade + HER2 + ER + PR
+    # print(to_calculate)
+        stage = stagingDictionary.get(to_calculate, "0")
+    # print(stage)
+    else:
+        stage = "IV"
+    return stage
     # input_into_database()
     # print("Your final classification is a: " + classification + to_calculate
     #      + " which means you are at a stage: " + stage)
