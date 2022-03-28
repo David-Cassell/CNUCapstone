@@ -32,6 +32,11 @@ def bladder():
 
 @app.route('/breast', methods=['GET','POST'])
 def breast():
+    if request.method == 'POST':
+        print(request.form)
+        requestDict = request.form
+        stage = StagingPythonFiles.BreastStaging.getValues(requestDict)
+        return stage
     return render_template('breast.html')
 
 

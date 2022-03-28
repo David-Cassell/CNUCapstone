@@ -2,6 +2,17 @@ stagingDictionary = {}
 
 clinical_path = r'stagingTextFiles\clinicalBreastStaging.txt'
 pathological_path = r'stagingTextFiles\pathologicalBreastStaging.txt'
+
+def getValues(requestDict):
+    size = requestDict.get("T-Value")
+    chest = ""
+    try:
+        chest += requestDict.get("chest-intrusion")
+    except(RuntimeError):
+        chest += "-"
+    print(chest)
+    return chest
+
 def clinical_lymph_def():
     category = "NX"
     assessed = input("can the lymph nodes be assessed (y/n)?")
@@ -39,13 +50,8 @@ def t_suffix(definition):
     return definition
 
 
-def size_of_tumor():
+def size_of_tumor(size):
     definition = "TX"
-    size = 0
-    assessed = input("can the tumor be assessed?(y/n) ")
-    if assessed == 'n':
-        return t_suffix(definition), float(size)
-    size = input("What is the size of the tumor in mm?: ")
     if float(size) <= 1.0:
         definition = "T1mi"
     elif 1.0 < float(size) <= 5.0:
