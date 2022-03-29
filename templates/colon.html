@@ -5,6 +5,71 @@
     <title>Colon Staging</title>
 </head>
 <body>
-{% extends 'base.html' %}
+<nav>
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('aboutMe') }}">About</a>
+</nav>
+<a href="{{ url_for('bladder') }}">Bladder</a>
+<a href="{{ url_for('colon') }}">Colon</a>
+<a href="{{ url_for('breast') }}">Breast</a>
+<a href="{{ url_for('lung') }}">Lung</a>
+<a href="{{ url_for('prostate') }}">Prostate</a>
+<div>
+    <h1>You are currently coding a Colon Cancer Cell</h1>
+    <form id="type" method="POST">
+         <input type="radio" name="type" id="clin" checked value="c">
+        <label for="clin">Clincal</label>
+        <input type="radio" name="type" id="path" value="p">
+        <label for="path">Pathological</label><br>
+        <label for="T-Value">T-Value</label>
+        <select name="T-Value" id="T-Value">
+          <option value="TX">Primary tumor cannot be assessed</option>
+          <option value="T0">No Evidence of primary tumor</option>
+          <option value="Tis">Carcinoma in situ, intramuscosal carcinoma</option>
+          <option value="T1">Tumor invades the submucosa (through the muscularis mucosa but not into the muscularis propria)</option>
+          <option value="T2">Tumor invades muscularis propria</option>
+          <option value="T3">Tumor invades through the muscularis propria into pericolorectal tissues</option>
+          <option value="T4">Tumor invades the visceral peritoneum or invades or adheres to adjacent organ or structure</option>
+          <option value="T4a">Tumor invades through the visceral perineum</option>
+          <option value="T4b">Tumor directly invades or adheres to adjacent organs or structures</option>
+          </select>
+
+        <br>
+
+        <label for="Clin-Metas">Clinical Metastasis Value:</label>
+        <select name="Clin-Metas" id="Clin-Metas" style='width:10%;'>
+          <option value="M0">No distant meastasis by imaging, etc; no evidence of tumor in distant sites or organs</option>
+          <option value="M1">Metastasis to one or more distant sites or organs or peritoneal metastasis is identified</option>
+          <option value="M1a">Metastasis to one site or organ is identified without peritoneal metastasis</option>
+          <option value="M1b">Metastasis to two or more sites or organs is identified witout peritoneal metastasis</option>
+            <option value="M1c">Metastasis to the peritoneal surface is identified alone or with other site or organ metastases</option>
+        </select>
+        <br>
+        <label for="Path-Metas">Pathological Metastasis Value:</label>
+        <select name="Path-Metas" id="Path-Metas" style='width:10%;'>
+          <option value="M1">Metastasis to one or more distant sites or organs or peritoneal metastasis is identified or microscopically confirmed</option>
+          <option value="M1a">Metastasis to one site or organ is identified without peritoneal metastasis and microscopically confirmed</option>
+          <option value="M1b">Metastasis to two or more sites or organs is identified without peritoneal metastasis and microscopically confirmed</option>
+          <option value="M1c">Metastasis to the peritoneal surface is identified alone or with other site or organ metastases and microscopically confirmed</option>
+        </select>
+        <br>
+        <label for="Lymph">Lymph Node:</label>
+        <select name="Lymph" id="Lymph" style="width: 50%;">
+          <option value="NX">Lymph Nodes cannot be assessed</option>
+          <option value="N0">No Lymph Node Metastasis</option>
+          <option value="N1">One to three lymph nodes are positive, or any number of tumor deposits are present and all identifiable lymph nodes are negative</option>
+            <option value="N1a">One regional lymph node is positive</option>
+            <option value="N1b">Two or three regional lymph nodes are positive</option>
+            <option value="N1c">No regional lymph nodes are positive, but there are tumor deposits in the: subserosa, mesentery,
+                or nonperitonealized pericolic, or perirectal/mesorectal tissues</option>
+          <option value="N2">Four or more regionla nodes are positive</option>
+          <option value="N2a">Four to six regional lymph nodes are positive</option>
+            <option value="N2b">Seven or more regional lymph nodes are positive</option>
+        </select>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+</div>
 </body>
 </html>
