@@ -94,9 +94,9 @@ def calculate(classification, T_value, Nvalue, metastasis, grade, HER2, ER, PR):
     pass
 
     if classification == 'c':
-        read_in("clinicalBreastStaging.txt")
+        read_in(clinical_path)
     elif classification == 'p':
-        read_in("pathologicalBreastStaging.txt")
+        read_in(pathological_path)
 
     to_calculate = " "
     # final classification will be as such: [T, N, M, G, HER2, ER, PR]
@@ -111,6 +111,7 @@ def calculate(classification, T_value, Nvalue, metastasis, grade, HER2, ER, PR):
     # print(stage)
     else:
         stage = "IV"
+    stagingDictionary.clear()
     return stage
     # input_into_database()
     # print("Your final classification is a: " + classification + to_calculate

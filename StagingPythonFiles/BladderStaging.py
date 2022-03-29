@@ -26,5 +26,6 @@ def stage(TValue, NValue, MValue):
     print(to_calculate)
     stage = stagingDictionary.get(to_calculate, "0")
     print(stage)
+    stagingDictionary.clear()
     return stage
 

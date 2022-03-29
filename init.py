@@ -30,7 +30,7 @@ def bladder():
 @app.route('/breast', methods=['GET','POST'])
 def breast():
     if request.method == 'POST':
-        print(request.form)
+        # print(request.form)
         requestDict = request.form
         stage = BreastStaging.getValues(requestDict)
         return stage
@@ -40,7 +40,7 @@ def breast():
 @app.route('/colon', methods=['GET','POST'])
 def colon():
     if request.method == 'POST':
-        print(request.form)
+        # print(request.form)
         requestDict = request.form
         stage = ColonStaging.getValues(requestDict)
         return stage
@@ -50,7 +50,7 @@ def colon():
 @app.route('/lung', methods=['GET','POST'])
 def lung():
     if request.method == 'POST':
-        print(request.form)
+        # print(request.form)
         requestDict = request.form
         stage = LungStaging.getValues(requestDict)
         return stage
