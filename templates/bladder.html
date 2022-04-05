@@ -14,9 +14,9 @@
 <a href="{{ url_for('breast') }}">Breast</a>
 <a href="{{ url_for('lung') }}">Lung</a>
 <a href="{{ url_for('prostate') }}">Prostate</a>
-    <div>
-        <h1>You are currently coding a Bladder Cancer Cell</h1>
-      <form id="type" method="POST">
+<div>
+    <h1>You are currently coding a Bladder Cancer Cell</h1>
+    <form id="type" method="POST">
 
         <input type="radio" name="type" id="clin" checked value="c">
         <label for="clin">Clincal</label>
@@ -24,46 +24,54 @@
         <label for="path">Pathological</label><br>
         <label for="T-Value">T-Value</label>
         <select name="T-Value" id="T-Value">
-          <option value="TX">Value cannot be assessed</option>
-          <option value="T0">No Evidence of primary tumor</option>
-          <option value="Ta">Non-invasive papillary carcinoma</option>
-          <option value="Tis">Urothelial carcinoma in situ: "flat tumor"</option>
-          <option value="T1">Tumor invades lamina propria (subepithelial conncetive tissue)</option>
-          <option value="T2">Tumor invades muscularis propria</option>
-          <option value="T2a">Tumor invades superficial muscularis propria (inner half)</option>
-          <option value="T2b">Tumor invades deep muscularis propria (outer half)</option>
-          <option value="T3">Tumor invades perivesical soft tissue</option>
-          <option value="T3a">Tumor invades perivesical soft tissue microscopically</option>
-          <option value="T3b">Tumor invades perivesical soft tissue macorscopically (extavesical mass)</option>
-          <option value="T4">Extavesical tumor invades any of the following: prostatic stroma, seminal vesicles, uterus, vagina pelvic wall
-          abdominal wall</option>
-          <option value="T4a">Extravesical tumor invades directly into prostatic stroma, seminal vesicles, uterus, vagina</option>
-          <option value="T4b">Extravesical tumor invades pelvic wall, abdomical wall</option>
-          </select>
+            <option value="TX">Value cannot be assessed</option>
+            <option value="T0">No Evidence of primary tumor</option>
+            <option value="Ta">Non-invasive papillary carcinoma</option>
+            <option value="Tis">Urothelial carcinoma in situ: "flat tumor"</option>
+            <option value="T1">Tumor invades lamina propria (subepithelial conncetive tissue)</option>
+            <option value="T2">Tumor invades muscularis propria</option>
+            <option value="T2a">Tumor invades superficial muscularis propria (inner half)</option>
+            <option value="T2b">Tumor invades deep muscularis propria (outer half)</option>
+            <option value="T3">Tumor invades perivesical soft tissue</option>
+            <option value="T3a">Tumor invades perivesical soft tissue microscopically</option>
+            <option value="T3b">Tumor invades perivesical soft tissue macorscopically (extavesical mass)</option>
+            <option value="T4">Extavesical tumor invades any of the following: prostatic stroma, seminal vesicles,
+                uterus, vagina pelvic wall
+                abdominal wall
+            </option>
+            <option value="T4a">Extravesical tumor invades directly into prostatic stroma, seminal vesicles, uterus,
+                vagina
+            </option>
+            <option value="T4b">Extravesical tumor invades pelvic wall, abdomical wall</option>
+        </select>
         <br>
 
         <label for="Metas">Metastasis Value:</label>
         <select name="Metas" id="Metas" style='width:10%;'>
-          <option value="M0">No clinical or radographic evidence of distant metastases</option>
-          <option value="M0">No clinical or radiographic evicdence of distant metastases in the presence of tumor cells or
-            deposits no larger than 0.2mm detected microscopically or by molecular techniques in circulating blood, bone
-            marrow, or other nonregional nodal tissue in a patient without symptoms or signs of metastases</option>
-          <option value="M1">Distant metastasis detected by clinical and radiographic means</option>
-          <option value="M1">Any histologically proven metastases in distant organs; or if in non-regional nodes,
-            metastases greater than 0.2mm</option>
+            <option value="M0">No clinical or radographic evidence of distant metastases</option>
+            <option value="M0">No clinical or radiographic evicdence of distant metastases in the presence of tumor
+                cells or
+                deposits no larger than 0.2mm detected microscopically or by molecular techniques in circulating blood,
+                bone
+                marrow, or other nonregional nodal tissue in a patient without symptoms or signs of metastases
+            </option>
+            <option value="M1">Distant metastasis detected by clinical and radiographic means</option>
+            <option value="M1">Any histologically proven metastases in distant organs; or if in non-regional nodes,
+                metastases greater than 0.2mm
+            </option>
         </select>
         <br>
         <label for="Lymph">Lymph Node:</label>
         <select name="Lymph" id="Lymph" style="width: 50%;">
-          <option value="NX">Lymph Nodes cannot be assessed</option>
-          <option value="N0">No Lymph Node Metastasis</option>
-          <option value="N1">Single regional lymph node in the true pelvis</option>
-          <option value="N2">Multiple lymph node metastasis in the true pelvis</option>
-          <option value="N3">Lymph node metastasis to the common iliac lymph nodes</option>
+            <option value="NX">Lymph Nodes cannot be assessed</option>
+            <option value="N0">No Lymph Node Metastasis</option>
+            <option value="N1">Single regional lymph node in the true pelvis</option>
+            <option value="N2">Multiple lymph node metastasis in the true pelvis</option>
+            <option value="N3">Lymph node metastasis to the common iliac lymph nodes</option>
         </select>
         <br>
         <button type="submit">Submit</button>
-      </form>
-    </div>
+    </form>
+</div>
 </body>
 </html>

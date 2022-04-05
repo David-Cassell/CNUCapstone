@@ -1,6 +1,6 @@
 stagingDictionary = {}
 
-#from stagingTextFiles import
+# from stagingTextFiles import
 clinical_path = r'stagingTextFiles\clinicalBreastStaging.txt'
 pathological_path = r'stagingTextFiles\pathologicalBreastStaging.txt'
 
@@ -37,7 +37,7 @@ def getValues(requestDict):
     HER2 = requestDict.get('Her2')
     ER = requestDict.get('Er')
     PR = requestDict.get('Pr')
-    stage = calculate(classification,tvalue,nvalue, mets,grade,HER2, ER, PR)
+    stage = calculate(classification, tvalue, nvalue, mets, grade, HER2, ER, PR)
     return stage
 
 
@@ -106,7 +106,7 @@ def calculate(classification, T_value, Nvalue, metastasis, grade, HER2, ER, PR):
         if Nvalue == "N3":
             T_value = "T"
         to_calculate = T_value + Nvalue + metastasis + grade + HER2 + ER + PR
-    # print(to_calculate)
+        # print(to_calculate)
         stage = stagingDictionary.get(to_calculate, "0")
     # print(stage)
     else:

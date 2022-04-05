@@ -23,7 +23,7 @@ def read_in(fileToRead):
         dictStage = line.split(":")
         stagingDictionary.update({dictStage[0]: dictStage[1]})
 
-    #print("it was read")
+    # print("it was read")
     file.close()
 
 
@@ -31,6 +31,6 @@ def stage(tValue, nValue, mets):
     read_in(path)
     to_calculate = tValue + nValue + mets
     istage = stagingDictionary.get(to_calculate, "0")
-    #print(istage)
+    # print(istage)
     stagingDictionary.clear()
     return istage
