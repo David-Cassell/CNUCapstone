@@ -112,7 +112,7 @@ def calculate(classification, T_value, Nvalue, metastasis, grade, HER2, ER, PR):
     else:
         stage = "IV"
     stagingDictionary.clear()
-    return stage
+    return to_calculate, stage
     # input_into_database()
     # print("Your final classification is a: " + classification + to_calculate
     #      + " which means you are at a stage: " + stage)

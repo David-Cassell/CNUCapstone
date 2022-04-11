@@ -4,8 +4,14 @@ path = r'stagingTextFiles\bladderStaging.txt'
 
 
 def getValues(requestDict):
+    Ttype = requestDict.get('type')
     Tvalue = requestDict.get('T-Value')
-    Mvalue = requestDict.get('Metas')
+    if(Ttype == "c"):
+        Mvalue = requestDict.get('Clin-Metas')
+    else:
+        Mvalue = requestDict.get('Path-Metas')
+    if(Mvalue == "M1"):
+        Mvalue = "M1a"
     Nvalue = requestDict.get('Lymph')
     final_stage = stage(Tvalue, Nvalue, Mvalue)
     return final_stage
@@ -29,4 +35,4 @@ def stage(TValue, NValue, MValue):
     stage = stagingDictionary.get(to_calculate, "0")
     print(stage)
     stagingDictionary.clear()
-    return stage
+    return to_calculate, stage

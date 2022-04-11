@@ -24,7 +24,7 @@
         <label for="path">Pathological</label><br>
         <label for="T-Value">T-Value</label>
         <select name="T-Value" id="T-Value">
-            <option value="TX">Value cannot be assessed</option>
+            <option value="TX">Primary tumor cannot be assessed</option>
             <option value="T0">No Evidence of primary tumor</option>
             <option value="Ta">Non-invasive papillary carcinoma</option>
             <option value="Tis">Urothelial carcinoma in situ: "flat tumor"</option>
@@ -46,18 +46,26 @@
         </select>
         <br>
 
-        <label for="Metas">Metastasis Value:</label>
-        <select name="Metas" id="Metas" style='width:10%;'>
-            <option value="M0">No clinical or radographic evidence of distant metastases</option>
-            <option value="M0">No clinical or radiographic evicdence of distant metastases in the presence of tumor
-                cells or
-                deposits no larger than 0.2mm detected microscopically or by molecular techniques in circulating blood,
-                bone
-                marrow, or other nonregional nodal tissue in a patient without symptoms or signs of metastases
+        <label for="Clin-Metas">Clinical Metastasis Value:</label>
+        <select name="Clin-Metas" id="Clin-Metas" style='width:10%;'>
+            <option value="M0">No distant metastasis
             </option>
-            <option value="M1">Distant metastasis detected by clinical and radiographic means</option>
-            <option value="M1">Any histologically proven metastases in distant organs; or if in non-regional nodes,
-                metastases greater than 0.2mm
+            <option value="M1">Distant Metastasis
+            </option>
+            <option value="M1a">Distant metastasis limited to lymph nodes beyond the common iliacs
+            </option>
+            <option value="M1b">Non-lymph-node distant metastases
+            </option>
+
+        </select>
+        <br>
+        <label for="Path-Metas">Pathological Metastasis Value:</label>
+        <select name="Path-Metas" id="Path-Metas" style='width:10%;'>
+            <option value="M1">Distant meatastis, microscopically confirmed
+            </option>
+            <option value="M1a">Distant metastasis limited to lymph nodes beyond the common iliacs, microscopically confirmed
+            </option>
+            <option value="M1b">Non-lymph-node distant metastases, microscopically confirmed
             </option>
         </select>
         <br>

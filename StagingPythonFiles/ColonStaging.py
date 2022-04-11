@@ -33,4 +33,4 @@ def stage(tValue, nValue, mets):
     istage = stagingDictionary.get(to_calculate, "0")
     # print(istage)
     stagingDictionary.clear()
-    return istage
+    return to_calculate, istage

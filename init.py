@@ -22,7 +22,7 @@ def bladder():
         print(request.form)
         requestDict = request.form
         stage = BladderStaging.getValues(requestDict)
-        return stage
+        return stage[0] + " " + stage[1]
 
     return render_template('bladder.html')
 
@@ -53,7 +53,7 @@ def lung():
         # print(request.form)
         requestDict = request.form
         stage = LungStaging.getValues(requestDict)
-        return stage
+        return stage[0] + stage[1]
     return render_template('lung.html')
 
 
