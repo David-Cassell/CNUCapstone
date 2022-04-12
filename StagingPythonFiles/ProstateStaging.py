@@ -1,2 +1,41 @@
+stagingDictionary = {}
+
+clinpath = r'stagingTextFiles\clinicalprostateStaging.txt'
+pathpath = r'stagingTextFiles\pathologicalProstateStaging.txt'
+
+
 def getValues(requestDict):
-    return None
+    classification = requestDict.get("type")
+    tValue = requestDict.get("T-Value")
+    nValue = requestDict.get('Lymph')
+    if classification == "c":
+        mets = requestDict.get("Clin-Metas")
+    else:
+        mets = requestDict.get("Path-Metas")
+    Psa = requestDict.get("PSA-Value")
+    gleason = requestDict.get("Gleason")
+    final_stage = stage(classification, tValue, nValue, mets, Psa, gleason)
+
+    return final_stage
+
+
+def read_in(fileToRead):
+    file = open(fileToRead, encoding="utf-8")
+
+    for line in file:
+        dictStage = line.split(":")
+        stagingDictionary.update({dictStage[0]: dictStage[1]})
+
+    # print("it was read")
+    file.close()
+
+
+def stage(classification, tValue, nValue, mets, psa, gleason):
+    if classification == "p":
+        read_in(pathpath)
+    elif classification == "c":
+        read_in(clinpath)
+    to_calculate = tValue + nValue + mets + psa + gleason
+    istage = stagingDictionary.get(to_calculate, "0")
+    stagingDictionary.clear()
+    return to_calculate, istage
