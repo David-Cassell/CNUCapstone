@@ -7,6 +7,7 @@ pathological_path = r'stagingTextFiles\pathologicalBreastStaging.txt'
 
 def getValues(requestDict):
     size = requestDict.get("T-Value")
+
     if "chest" in requestDict:
         chest = "y"
     else:
@@ -43,39 +44,41 @@ def getValues(requestDict):
 
 def size_of_tumor(size, chest, skin, infla):
     definition = "TX"
-    if float(size) <= 1.0:
-        definition = "T1mi"
-    elif 1.0 < float(size) <= 5.0:
-        definition = "T1a"
-    elif 5.0 < float(size) <= 10.0:
-        definition = "T1b"
-    elif 10 < float(size) <= 20.0:
-        definition = "T1c"
-    elif 20 < float(size) <= 50:
-        definition = "T2"
-    elif float(size) > 50.0:
-        definition = "T3"
+    # my defence against SQL injection, makes it so if you stage something
+    # without a size it will stage it as a defaulted TX
+    try:
+        if float(size) <= 1.0:
+            definition = "T1mi"
+        elif 1.0 < float(size) <= 5.0:
+            definition = "T1a"
+        elif 5.0 < float(size) <= 10.0:
+            definition = "T1b"
+        elif 10 < float(size) <= 20.0:
+            definition = "T1c"
+        elif 20 < float(size) <= 50:
+            definition = "T2"
+        elif float(size) > 50.0:
+            definition = "T3"
 
-    if chest == "y" and skin == 'n':
+        if chest == "y" and skin == 'n':
+            return definition
+        else:
+            definition = "T4"
+            isTA = chest
+            isTB = skin
+            if isTA == 'y' and isTB == 'n':
+                return "T4a"
+
+            elif isTA == 'n' and isTB == 'y':
+                return "T4b"
+
+            elif isTA == 'y' and isTB == 'y':
+                return "T4c"
+
+            if infla == 'y':
+                return "T4d"
+    except ValueError:
         return definition
-    else:
-        definition = "T4"
-        isTA = chest
-        isTB = skin
-        if isTA == 'y' and isTB == 'n':
-            return "T4a"
-
-        elif isTA == 'n' and isTB == 'y':
-            return "T4b"
-
-        elif isTA == 'y' and isTB == 'y':
-            return "T4c"
-
-        if infla == 'y':
-            return "T4d"
-
-    return definition
-
 
 def input_into_database():
     pass
@@ -91,8 +94,6 @@ def read_in(fileToRead):
 
 
 def calculate(classification, T_value, Nvalue, metastasis, grade, HER2, ER, PR):
-    pass
-
     if classification == 'c':
         read_in(clinical_path)
     elif classification == 'p':
@@ -102,14 +103,18 @@ def calculate(classification, T_value, Nvalue, metastasis, grade, HER2, ER, PR):
     # final classification will be as such: [T, N, M, G, HER2, ER, PR]
     if T_value.__contains__("T1"):
         T_value = "T1"
+    if T_value.__contains__("T4"):
+        T_value = "T4"
     if metastasis != "M1":
         if Nvalue == "N3":
             T_value = "T"
         to_calculate = T_value + Nvalue + metastasis + grade + HER2 + ER + PR
-        # print(to_calculate)
+        print(to_calculate)
         stage = stagingDictionary.get(to_calculate, "0")
     # print(stage)
     else:
+        to_calculate = T_value + Nvalue + metastasis + grade + HER2 + ER + PR
+        print(to_calculate)
         stage = "IV"
     stagingDictionary.clear()
     return to_calculate, stage

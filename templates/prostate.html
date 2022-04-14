@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Prostate Staging</title>
 </head>
 <body>
@@ -26,7 +31,8 @@
             <option value="TX">Primary tumor cannot be assessed</option>
             <option value="T0">No Evidence of primary tumor</option>
             <option value="Tis">Carcinoma in situ, squamous cell carcinoma</option>
-            <option value="T1">Tumor <=3 cm in the greatest dimension, surrounded by lung or visceral pleura, without
+            <option value="T1" >Tumor <=3 cm in the greatest dimension,
+                surrounded by lung or visceral pleura, without
                 bronchoscopic evidence of invasion more proximal than the lobar bronchus
             </option>
             <option value="T1mi">Minimally invasive adenocarcinoma: adenocarcinoma(<=3cm) with a predominantly lepidic
@@ -36,9 +42,10 @@
             <option value="T1b">Tumor >1cm but <=2cm in greatest dimension</option>
             <option value="T1c">Tumor >2cm but <=3cm in greatest dimension</option>
             <option value="T2">Tumor >3cm but <=5cm or Involves the main bronchus regardless of distance to carina, but
-                without involvment of the carina; invades PL1 or PL2; associated with the atelectasis or obstructive
-                pnuemonitis that extends to the hilar region
-            </option>
+                without involvment of the carina</option>
+            <option value="T2"> Tumor invades PL1 or PL2; associated with the atelectasis or obstructive
+                pnuemonitis that extends to the hilar region</option>
+
             <option value="T2a">Tumor >3cm but <=4cm OR size cannot be determined</option>
             <option value="T2b">Tumor >4cm but <=5cm</option>
             <option value="T3">Tumor >5cm but <=7cm or directly invading any of the following: PL3, chest wall, phrenic
@@ -47,10 +54,8 @@
             <option value="T4">Tumor >7cm OR tumor of any size invading one or more of: diaphragm, mediastinum, heart,
                 great vessels, trachea, recurrent laryngeal nerve, esophagus, vertebral body or carina
             </option>
-        </select>
-
-        <br>
-         <label for="Path-T-Value">Pathological T-Value</label>
+        </select><br>
+        <label for="Path-T-Value">Pathological T-Value</label>
         <select name="Path-T-Value" id="Path-T-Value">
             <option value="T2">Organ Confirmed</option>
             <option value="T3">Extraprostatic extension</option>
