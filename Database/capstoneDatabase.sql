@@ -25,5 +25,33 @@ create table breast(
 
 create table bladder(
 	bladderClinorPath binary,
-    
+    bladderTValue varchar(15),
+    bladderMetastasis varchar(15),
+    bladderLymnpNode varchar(15),
+    bladderStage varchar(15)
+);
+
+create table colon(
+	colonClinorPath binary,
+    colonTValue varchar(15),
+    colonMetastasis varchar(15),
+    colonLymphNode varchar(15),
+    colonStage varchar(15)
+);
+
+create table lung(
+	lungClinorPath binary,
+    lungTValue varchar(15),
+    lungMetastasis varchar(15),
+    lungLymphNode varchar(15),
+    lungStage varchar(15)
+);
+
+create table prostate(
+	prostateClinorPath binary,
+    prostateTValue varchar(15),
+    prostateMetastasis varchar(15),
+    prostateLymphNode varchar(15),
+    prostatePSA varchar(15),
+    prostateGleason varchar(15)
 );
