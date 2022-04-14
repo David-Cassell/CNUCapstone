@@ -22,7 +22,7 @@ def bladder():
         print(request.form)
         requestDict = request.form
         stage = BladderStaging.getValues(requestDict)
-        return stage[0] + " " + stage[1]
+        return render_template('bladder.html',toStage=stage[0],stage=stage[1])
 
     return render_template('bladder.html')
 
@@ -33,7 +33,7 @@ def breast():
         # print(request.form)
         requestDict = request.form
         stage = BreastStaging.getValues(requestDict)
-        return stage
+        return render_template('breast.html',toStage=stage[0],stage=stage[1])
     return render_template('breast.html')
 
 
@@ -43,7 +43,7 @@ def colon():
         # print(request.form)
         requestDict = request.form
         stage = ColonStaging.getValues(requestDict)
-        return stage
+        return render_template('colon.html',toStage=stage[0],stage=stage[1])
     return render_template('colon.html')
 
 
@@ -53,7 +53,7 @@ def lung():
         # print(request.form)
         requestDict = request.form
         stage = LungStaging.getValues(requestDict)
-        return stage[0] + stage[1]
+        return render_template('lung.html',toStage=stage[0],stage=stage[1])
     return render_template('lung.html')
 
 
@@ -63,7 +63,8 @@ def prostate():
         print(request.form)
         requestDict = request.form
         stage = ProstateStaging.getValues(requestDict)
-        return stage
+        print (stage[1])
+        return render_template('prostate.html',toStage=stage[0],stage=stage[1])
     return render_template('prostate.html')
 
 

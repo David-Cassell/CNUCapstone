@@ -117,5 +117,11 @@
     </form>
 
 </div>
+    {% if toStage %}
+    <p>You staged: {{toStage}}</p>
+    {% endif %}
+    {% if stage %}
+    <p>Which resulted in a stage {{stage}} cancer cell in this person</p>
+    {% endif %}
 </body>
 </html>
