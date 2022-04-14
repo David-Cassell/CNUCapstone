@@ -6,11 +6,12 @@ pathpath = r'stagingTextFiles\pathologicalProstateStaging.txt'
 
 def getValues(requestDict):
     classification = requestDict.get("type")
-    tValue = requestDict.get("T-Value")
     nValue = requestDict.get('Lymph')
     if classification == "c":
+        tValue = requestDict.get("Clin-T-Value")
         mets = requestDict.get("Clin-Metas")
     else:
+        tValue = requestDict.get("Path-T-Value")
         mets = requestDict.get("Path-Metas")
     Psa = requestDict.get("PSA-Value")
     gleason = requestDict.get("Gleason")
@@ -35,6 +36,12 @@ def stage(classification, tValue, nValue, mets, psa, gleason):
         read_in(pathpath)
     elif classification == "c":
         read_in(clinpath)
+
+    if tValue == "T3" or tValue == "T3a" or tValue == "T3b" or tValue == "T4":
+        psa = "E"
+    if gleason == "5" or nValue == "N1" or mets == "M1":
+        psa = "E"
+
     to_calculate = tValue + nValue + mets + psa + gleason
     istage = stagingDictionary.get(to_calculate, "0")
     stagingDictionary.clear()
