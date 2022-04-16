@@ -1,10 +1,17 @@
 from flask import Flask, render_template, request
 from StagingPythonFiles import BladderStaging, BreastStaging, ColonStaging, LungStaging, ProstateStaging
+import mysql.connector
+
 
 app = Flask(__name__)
 
 stagingDictionary = {}
 
+mydb = mysql.connector.connect(
+    host = "localhost",
+    user="root",
+    password="R5eu12o$"
+)
 
 @app.route('/')
 def home():
