@@ -1,4 +1,5 @@
 import mysql.connector
+
 stagingDictionary = {}
 
 path = r'stagingTextFiles\bladderStaging.txt'
@@ -38,6 +39,7 @@ def stage(TValue, NValue, MValue):
     stagingDictionary.clear()
     return to_calculate, stage
 
+
 def input_into_database(requestDict, stage):
     mydb = mysql.connector.connect(
         host="localhost",
@@ -52,18 +54,31 @@ def input_into_database(requestDict, stage):
     mycursor = mydb.cursor()
 
     hName = requestDict.get("HospitalName")
-    print(hName)
     hAddress = requestDict.get("HospitalAddress")
-    print(hAddress)
+
+    Ttype = requestDict.get('type')
+    Tvalue = requestDict.get('T-Value')
+    if Ttype == "c":
+        Mvalue = requestDict.get('Clin-Metas')
+    else:
+        Mvalue = requestDict.get('Path-Metas')
+    if Mvalue == "M1":
+        Mvalue = "M1a"
+    Nvalue = requestDict.get('Lymph')
+
+    patient_gender = requestDict.get("Gender")
+
     hospital_sql = "insert into Hospital(hName, hAddress) values (%s,%s)"
-    hospital_values = (hName,hAddress)
-    bladder_sql_stuff = "insert into Prostate(ProstateClass, breastTValue, breastGrade, breastMets, breastLymph, breastER, " \
-                "breastHER2, breastPER, breastStage)" \
-                " values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    mycursor.execute(hospital_sql,hospital_values)
+    hospital_values = (hName, hAddress)
+    bladder_sql_stuff = "insert into Bladder(BladderClass, bladderTValue, bladderMets, bladderLymph, bladderStage, " \
+                        " values (%s, %s, %s, %s, %s)"
+    bladder_values = (Ttype,Tvalue,Mvalue,Nvalue,stage)
+    mycursor.execute(hospital_sql, hospital_values)
+    mycursor.execute(bladder_sql_stuff,bladder_values)
     mydb.commit()
 
     mycursor.execute("Select * from hospital")
+    mycursor.execute("Select * from Bladder")
     myresult = mycursor.fetchall()
 
     for x in myresult:
