@@ -70,11 +70,14 @@ def input_into_database(requestDict, stage):
 
     hospital_sql = "insert into Hospital(hName, hAddress) values (%s,%s)"
     hospital_values = (hName, hAddress)
+    bladder_values = (Ttype, Tvalue, Mvalue, Nvalue, stage)
+    for x in bladder_values:
+        print(x)
     bladder_sql_stuff = "insert into Bladder(BladderClass, bladderTValue, bladderMets, bladderLymph, bladderStage, " \
-                        " values (%s, %s, %s, %s, %s)"
-    bladder_values = (Ttype,Tvalue,Mvalue,Nvalue,stage)
+                        " values ('%s', '%s', '%s', '%s', '%s')"
+
     mycursor.execute(hospital_sql, hospital_values)
-    mycursor.execute(bladder_sql_stuff,bladder_values)
+    mycursor.execute(bladder_sql_stuff,(bladder_values,))
     mydb.commit()
 
     mycursor.execute("Select * from hospital")

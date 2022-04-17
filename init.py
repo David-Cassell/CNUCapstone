@@ -22,7 +22,7 @@ def bladder():
         print(request.form)
         requestDict = request.form
         stage = BladderStaging.getValues(requestDict)
-        BladderStaging.input_into_database(requestDict,stage)
+        BladderStaging.input_into_database(requestDict,stage[1])
         return render_template('bladder.html',toStage=stage[0],stage=stage[1])
 
     return render_template('bladder.html')
@@ -34,7 +34,7 @@ def breast():
         # print(request.form)
         requestDict = request.form
         stage = BreastStaging.getValues(requestDict)
-        BreastStaging.input_into_database(requestDict, stage)
+        BreastStaging.input_into_database(requestDict, stage[1])
         return render_template('breast.html',toStage=stage[0],stage=stage[1])
     return render_template('breast.html')
 
@@ -45,7 +45,7 @@ def colon():
         # print(request.form)
         requestDict = request.form
         stage = ColonStaging.getValues(requestDict)
-        ColonStaging.input_into_database(requestDict, stage)
+        ColonStaging.input_into_database(requestDict, stage[1])
         return render_template('colon.html',toStage=stage[0],stage=stage[1])
     return render_template('colon.html')
 
@@ -56,7 +56,7 @@ def lung():
         # print(request.form)
         requestDict = request.form
         stage = LungStaging.getValues(requestDict)
-        LungStaging.input_into_database(requestDict, stage)
+        LungStaging.input_into_database(requestDict, stage[1])
         return render_template('lung.html',toStage=stage[0],stage=stage[1])
     return render_template('lung.html')
 
@@ -67,8 +67,7 @@ def prostate():
         print(request.form)
         requestDict = request.form
         stage = ProstateStaging.getValues(requestDict)
-        ProstateStaging.input_into_database(requestDict, stage)
-        print (stage[1])
+        ProstateStaging.input_into_database(requestDict, stage[1])
         return render_template('prostate.html',toStage=stage[0],stage=stage[1])
     return render_template('prostate.html')
 
