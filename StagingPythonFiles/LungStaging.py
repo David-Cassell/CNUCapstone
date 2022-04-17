@@ -1,4 +1,4 @@
-import mysql.connector
+#import mysql.connector
 stagingDictionary = {}
 
 path = r'stagingTextFiles\lungStaging.txt'
@@ -36,7 +36,7 @@ def stage(tValue, nValue, mets):
     stagingDictionary.clear()
     return to_calculate, istage
 
-def input_into_database(classs, T_value, Nvalue, metastasis, stage):
+def input_into_database(requestDict, stage):
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",

@@ -1,4 +1,4 @@
-import mysql.connector
+#import mysql.connector
 stagingDictionary = {}
 
 clinpath = r'stagingTextFiles\clinicalprostateStaging.txt'
@@ -48,7 +48,7 @@ def stage(classification, tValue, nValue, mets, psa, gleason):
     stagingDictionary.clear()
     return to_calculate, istage
 
-def input_into_database(classs, T_value, Nvalue, metastasis, stage):
+def input_into_database(requestDict, stage):
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",

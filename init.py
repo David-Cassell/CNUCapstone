@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from StagingPythonFiles import BladderStaging, BreastStaging, ColonStaging, LungStaging, ProstateStaging
-
+#import mysql.connector
 
 
 app = Flask(__name__)
@@ -22,6 +22,7 @@ def bladder():
         print(request.form)
         requestDict = request.form
         stage = BladderStaging.getValues(requestDict)
+        BladderStaging.input_into_database(requestDict,stage)
         return render_template('bladder.html',toStage=stage[0],stage=stage[1])
 
     return render_template('bladder.html')
@@ -33,6 +34,7 @@ def breast():
         # print(request.form)
         requestDict = request.form
         stage = BreastStaging.getValues(requestDict)
+        BreastStaging.input_into_database(requestDict, stage)
         return render_template('breast.html',toStage=stage[0],stage=stage[1])
     return render_template('breast.html')
 
@@ -43,6 +45,7 @@ def colon():
         # print(request.form)
         requestDict = request.form
         stage = ColonStaging.getValues(requestDict)
+        ColonStaging.input_into_database(requestDict, stage)
         return render_template('colon.html',toStage=stage[0],stage=stage[1])
     return render_template('colon.html')
 
@@ -53,6 +56,7 @@ def lung():
         # print(request.form)
         requestDict = request.form
         stage = LungStaging.getValues(requestDict)
+        LungStaging.input_into_database(requestDict, stage)
         return render_template('lung.html',toStage=stage[0],stage=stage[1])
     return render_template('lung.html')
 
@@ -63,10 +67,24 @@ def prostate():
         print(request.form)
         requestDict = request.form
         stage = ProstateStaging.getValues(requestDict)
+        ProstateStaging.input_into_database(requestDict, stage)
         print (stage[1])
         return render_template('prostate.html',toStage=stage[0],stage=stage[1])
     return render_template('prostate.html')
 
-
+@app.route('/displayAll',methods=['GET','POST'])
+def displayAll():
+    # mydb = mysql.connector.connect(
+    #     host="localhost",
+    #     user="root",
+    #     password="R5eu12o$"
+    # )
+    # if mydb.is_connected():
+    #     print("Connected")
+    # else:
+    #     print("Not connected")
+    # mycursor = mydb.cursor()
+    # mycursor.execute("use capstone")
+    return render_template('displayAll.html')
 if __name__ == '__main__':
     app.run()

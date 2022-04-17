@@ -1,4 +1,4 @@
-import mysql.connector
+#import mysql.connector
 
 stagingDictionary = {}
 
@@ -44,7 +44,6 @@ def getValues(requestDict):
     PR = requestDict.get('Pr')
     print(classification + " " + tvalue + " " + nvalue + " " + mets + " " + grade + " " + HER2 + " " + ER + " " + PR)
     stage = calculate(classification, tvalue, nvalue, mets, grade, HER2, ER, PR)
-    input_into_database(classification, tvalue, nvalue, mets, grade, HER2, ER, PR, stage)
     return stage
 
 
@@ -87,7 +86,7 @@ def size_of_tumor(size, chest, skin, infla):
         return definition
 
 
-def input_into_database(classs, T_value, Nvalue, metastasis, grade, HER2, ER, PR, stage):
+def input_into_database(requestDict, stage):
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",

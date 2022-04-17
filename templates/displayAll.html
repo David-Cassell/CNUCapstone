@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Display All</title>
+    <style>table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
+    </style>
+</head>
+<body>
+<nav>
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('displayAll') }}">Display all</a>
+    <a href="{{ url_for('aboutMe') }}">About</a>
+</nav>
+<a href="{{ url_for('bladder') }}">Bladder</a>
+<a href="{{ url_for('colon') }}">Colon</a>
+<a href="{{ url_for('breast') }}">Breast</a>
+<a href="{{ url_for('lung') }}">Lung</a>
+<a href="{{ url_for('prostate') }}">Prostate</a>
+
+<p>Staged Bladder cells: </p>
+<table>
+    <thead>
+    <tr>
+        <th>Patient ID</th>
+        <th>Patient Gender</th>
+        <th>Hospital Name</th>
+        <th>Hospital Address</th>
+        <th>Classification</th>
+        <th>T-Value</th>
+        <th>Metastasis Value</th>
+        <th>Lymph Node Value</th>
+        <th>Stage</th>
+    </tr>
+
+    </thead>
+    {% for row in Bladder_data %}
+    <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+        <td>{{row[3]}}</td>
+        <td>{{row[4]}}</td>
+        <td>{{row[5]}}</td>
+        <td>{{row[6]}}</td>
+        <td>{{row[7]}}</td>
+        <td>{{row[8]}}</td>
+    </tr>
+    {% endfor %}
+</table><br>
+<p>Staged Breast cells: </p>
+
+<table>
+    <thead>
+    <tr>
+        <th>Patient ID</th>
+        <th>Patient Gender</th>
+        <th>Hospital Name</th>
+        <th>Hospital Address</th>
+        <th>Classification</th>
+        <th>Tumor Size</th>
+        <th>T-Value</th>
+        <th>Metastasis Value</th>
+        <th>Lymph Node Value</th>
+        <th>Grade</th>
+        <th>HER2 Status</th>
+        <th>ER Status</th>
+        <th>PR Status</th>
+        <th>Stage</th>
+    </tr>
+
+    </thead>
+    {% for row in Breast_data %}
+    <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+        <td>{{row[3]}}</td>
+        <td>{{row[4]}}</td>
+        <td>{{row[5]}}</td>
+        <td>{{row[6]}}</td>
+        <td>{{row[7]}}</td>
+        <td>{{row[8]}}</td>
+        <td>{{row[9]}}</td>
+        <td>{{row[10]}}</td>
+        <td>{{row[11]}}</td>
+        <td>{{row[12]}}</td>
+        <td>{{row[13]}}</td>
+    </tr>
+    {% endfor %}
+</table><br>
+
+<p>Staged Colon cells: </p>
+
+<table>
+    <thead>
+    <tr>
+        <th>Patient ID</th>
+        <th>Patient Gender</th>
+        <th>Hospital Name</th>
+        <th>Hospital Address</th>
+        <th>Classification</th>
+        <th>T-Value</th>
+        <th>Metastasis Value</th>
+        <th>Lymph Node Value</th>
+        <th>Stage</th>
+    </tr>
+
+    </thead>
+    {% for row in Colon_data %}
+    <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+        <td>{{row[3]}}</td>
+        <td>{{row[4]}}</td>
+        <td>{{row[5]}}</td>
+        <td>{{row[6]}}</td>
+        <td>{{row[7]}}</td>
+        <td>{{row[8]}}</td>
+    </tr>
+    {% endfor %}
+</table><br>
+
+<p>Staged Lung cells:</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>Patient ID</th>
+        <th>Patient Gender</th>
+        <th>Hospital Name</th>
+        <th>Hospital Address</th>
+        <th>Classification</th>
+        <th>T-Value</th>
+        <th>Metastasis Value</th>
+        <th>Lymph Node Value</th>
+        <th>Stage</th>
+    </tr>
+
+    </thead>
+    {% for row in Lung_data %}
+    <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+        <td>{{row[3]}}</td>
+        <td>{{row[4]}}</td>
+        <td>{{row[5]}}</td>
+        <td>{{row[6]}}</td>
+        <td>{{row[7]}}</td>
+        <td>{{row[8]}}</td>
+    </tr>
+    {% endfor %}
+</table><br>
+
+<p>Staged Prostate cells:</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>Patient ID</th>
+        <th>Patient Gender</th>
+        <th>Hospital Name</th>
+        <th>Hospital Address</th>
+        <th>Classification</th>
+        <th>T-Value</th>
+        <th>Metastasis Value</th>
+        <th>Lymph Node Value</th>
+        <th>PSA Value</th>
+        <th>Gleason Score</th>
+        <th>Stage</th>
+    </tr>
+
+    </thead>
+    {% for row in Prostate_data %}
+    <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+        <td>{{row[3]}}</td>
+        <td>{{row[4]}}</td>
+        <td>{{row[5]}}</td>
+        <td>{{row[6]}}</td>
+        <td>{{row[7]}}</td>
+        <td>{{row[8]}}</td>
+        <td>{{row[9]}}</td>
+        <td>{{row[10]}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

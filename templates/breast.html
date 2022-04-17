@@ -7,12 +7,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Prostate Staging</title>
     <title>Breast Staging</title>
 </head>
 <body>
 <nav>
     <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('displayAll') }}">Display all</a>
     <a href="{{ url_for('aboutMe') }}">About</a>
 </nav>
 <a href="{{ url_for('bladder') }}">Bladder</a>
@@ -20,8 +20,22 @@
 <a href="{{ url_for('breast') }}">Breast</a>
 <a href="{{ url_for('lung') }}">Lung</a>
 <a href="{{ url_for('prostate') }}">Prostate</a>
+
+<h2>Patient Information</h2>
+    <form id="Patient" method="POST">
+        <label for="Gender">What is the Gender of the patient: </label>
+        <select name="Gender" id="Gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other/Non-Binary</option>
+        </select><br>
+        <label for="HospitalName">Hospital Name:</label>
+        <input type="text" id="HospitalName" name="HospitalName"><br>
+        <label for="HospitalAddress">Hospital Address:</label>
+        <input type="text" id="HospitalAddress" name="HospitalAddress">
+    </form>
 <div>
-    <h1>You are currently coding a Breast Cancer Cell</h1>
+    <h2>You are currently coding a Breast Cancer Cell</h2>
     <form id="type" method="POST">
 
         <input type="radio" name="type" id="clin" checked value="c">
