@@ -12,6 +12,8 @@ mydb = mysql.connector.connect(
     user="root",
     password="R5eu12o$"
 )
+mycursor = mydb.cursor()
+mycursor.execute("use capstone")
 
 @app.route('/')
 def home():

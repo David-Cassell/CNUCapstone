@@ -1,8 +1,12 @@
+import mysql.connector
+
 stagingDictionary = {}
 
 # from stagingTextFiles import
 clinical_path = r'stagingTextFiles\clinicalBreastStaging.txt'
 pathological_path = r'stagingTextFiles\pathologicalBreastStaging.txt'
+
+
 
 
 def getValues(requestDict):
@@ -38,7 +42,9 @@ def getValues(requestDict):
     HER2 = requestDict.get('Her2')
     ER = requestDict.get('Er')
     PR = requestDict.get('Pr')
+    print(classification + " " + tvalue + " " + nvalue + " " + mets + " " + grade + " " + HER2 + " " + ER + " " + PR)
     stage = calculate(classification, tvalue, nvalue, mets, grade, HER2, ER, PR)
+    input_into_database(classification, tvalue, nvalue, mets, grade, HER2, ER, PR, stage)
     return stage
 
 
@@ -80,8 +86,24 @@ def size_of_tumor(size, chest, skin, infla):
     except ValueError:
         return definition
 
-def input_into_database():
-    pass
+
+def input_into_database(classs, T_value, Nvalue, metastasis, grade, HER2, ER, PR, stage):
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="R5eu12o$"
+    )
+    if mydb.is_connected():
+        print("Connected")
+    else:
+        print("Not connected")
+    mycursor = mydb.cursor()
+    mycursor.execute("use capstone")
+
+    sql_stuff = "insert into Breast(breastClass, breastTValue, breastGrade, breastMets, breastLymph, breastER, " \
+                "breastHER2, breastPER, breastStage)" \
+                " values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    mycursor.execute(sql_stuff, (classs, T_value, grade, metastasis, Nvalue, ER, HER2, PR, stage))
 
 
 def read_in(fileToRead):
@@ -118,6 +140,6 @@ def calculate(classification, T_value, Nvalue, metastasis, grade, HER2, ER, PR):
         stage = "IV"
     stagingDictionary.clear()
     return to_calculate, stage
-    # input_into_database()
+
     # print("Your final classification is a: " + classification + to_calculate
     #      + " which means you are at a stage: " + stage)
