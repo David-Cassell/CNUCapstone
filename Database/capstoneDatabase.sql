@@ -1,54 +1,67 @@
+-- drop database if exists capstone;
+-- create database capstone;
+use capstone;
+
+drop table if exists hospital;
+drop table if exists patient;
+drop table if exists breast;
+drop table if exists bladder;
+drop table if exists colon;
+drop table if exists lung;
+drop table if exists prostate;
+
 create table hospital(
 	hName varchar(20),
-    hAddress varchar(20)
+    hAddress varchar(20),
+    primary key(hName, hAddress)
 );
 
 create table Patient(
 	-- 0 is female, 1 is male
-	pGender binary,
-    pId int
+	pGender varchar(5),
+    pID int NOT NULL AUTO_INCREMENT,
+    primary key (pID)
 );
 
 create table breast(
-	breastClinorPath binary, -- 0 is Clin, 1 is Path
-	breastSize decimal,
-    breastLocation varchar(15),
+	breastClass varchar(15),
     breastTValue varchar(15),
     breastGrade varchar(15),
-    breastMetastasis varchar(15),
-    breastLymphNode varchar(15),
-    breastER binary,
-    breastHER2 binary,
-    breastPER binary,
+    breastMets varchar(15),
+    breastLymph varchar(15),
+    breastER varchar(15),
+    breastHER2 varchar(15),
+    breastPER varchar(15),
     breastStage varchar(15)
 );
 
 create table bladder(
-	bladderClinorPath binary,
+	patientID
+	bladderClass varchar(5),
     bladderTValue varchar(15),
-    bladderMetastasis varchar(15),
-    bladderLymnpNode varchar(15),
+    bladderMets varchar(15),
+    bladderLymph varchar(15),
     bladderStage varchar(15)
 );
 
 create table colon(
-	colonClinorPath binary,
+	colonClass varchar(5),
     colonTValue varchar(15),
-    colonMetastasis varchar(15),
-    colonLymphNode varchar(15),
+    colonMets varchar(15),
+    colonLymph varchar(15),
     colonStage varchar(15)
 );
 
 create table lung(
-	lungClinorPath binary,
+	lungClass varchar(5),
     lungTValue varchar(15),
-    lungMetastasis varchar(15),
-    lungLymphNode varchar(15),
+    lungMets varchar(15),
+    lungLymph varchar(15),
     lungStage varchar(15)
 );
 
 create table prostate(
-	prostateClinorPath binary,
+	prostateClinorPath varchar(5),
     prostateTValue varchar(15),
     prostateMetastasis varchar(15),
     prostateLymphNode varchar(15),
