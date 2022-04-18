@@ -1,5 +1,6 @@
 import mysql.connector
 import init
+
 stagingDictionary = {}
 
 path = r'stagingTextFiles\lungStaging.txt'
@@ -37,6 +38,7 @@ def stage(tValue, nValue, mets):
     stagingDictionary.clear()
     return to_calculate, istage
 
+
 def input_into_database(requestDict, stage):
     mydb = mysql.connector.connect(
         host="localhost",
@@ -64,8 +66,8 @@ def input_into_database(requestDict, stage):
     else:
         mets = requestDict.get("Path-Metas")
     lung_sql_stuff = "insert into Lung(patientID, lungClass, lungTValue, lungMets, lungLymph, lungStage, " \
-                " values (%s, %s, %s, %s, %s, %s)"
-    lung_values = (patient_id,classs,tValue,mets,nValue,stage)
+                     " values (%s, %s, %s, %s, %s, %s)"
+    lung_values = (patient_id, classs, tValue, mets, nValue, stage)
     hospital_sql = "insert into Hospital(hName, hAddress) values (%s,%s)"
     hospital_values = (hName, hAddress)
 

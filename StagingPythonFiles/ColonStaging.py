@@ -47,6 +47,14 @@ def input_into_database(requestDict, stage):
         database="capstone"
     )
 
+    classification = requestDict.get("type")
+    tValue = requestDict.get("T-Value")
+    nValue = requestDict.get('Lymph')
+    if classification == "c":
+        mets = requestDict.get("Clin-Metas")
+    else:
+        mets = requestDict.get("Path-Metas")
+
     mycursor = mydb.cursor()
     hName = requestDict.get("HospitalName")
     hAddress = requestDict.get("HospitalAddress")
@@ -56,9 +64,9 @@ def input_into_database(requestDict, stage):
 
     # that way it always goes up and should not be the same
     init.patientID += 1
-    sql_stuff = "insert into Prostate(ProstateClass, breastTValue, breastGrade, breastMets, breastLymph, breastER, " \
-                "breastHER2, breastPER, breastStage)" \
-                " values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    sql_stuff = "insert into Colon(patientID, colonClass, colonTValue, colonMets, colonLymph, colonStage)" \
+                " values (%s, %s, %s, %s, %s, %s)"
+    colon_values = (patient_id,classification,tValue,mets,nValue,stage)
     hospital_sql = "insert into Hospital(hName, hAddress) values (%s,%s)"
     hospital_values = (hName, hAddress)
 
@@ -70,3 +78,6 @@ def input_into_database(requestDict, stage):
     except mysql.connector.errors.IntegrityError:
         pass
     mycursor.execute(patient_sql, patient_values)
+    mycursor.execute(sql_stuff,colon_values)
+
+    mydb.commit()

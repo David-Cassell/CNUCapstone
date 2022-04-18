@@ -30,6 +30,7 @@ def bladder():
 
 @app.route('/breast', methods=['GET', 'POST'])
 def breast():
+    # heh heh boobs
     if request.method == 'POST':
         # print(request.form)
         requestDict = request.form
@@ -52,6 +53,7 @@ def colon():
 
 @app.route('/lung', methods=['GET', 'POST'])
 def lung():
+    # have you or a loved one been diagnosed with mesothelioma
     if request.method == 'POST':
         # print(request.form)
         requestDict = request.form
@@ -63,6 +65,7 @@ def lung():
 
 @app.route('/prostate', methods=['GET', 'POST'])
 def prostate():
+    # the forbidden scrunchy
     if request.method == 'POST':
         print(request.form)
         requestDict = request.form
