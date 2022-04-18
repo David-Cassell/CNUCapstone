@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from StagingPythonFiles import BladderStaging, BreastStaging, ColonStaging, LungStaging, ProstateStaging
 #import mysql.connector
 
-
+patientID = 1
 app = Flask(__name__)
 
 

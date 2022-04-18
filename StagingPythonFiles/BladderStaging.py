@@ -1,3 +1,5 @@
+import init
+
 import mysql.connector
 
 stagingDictionary = {}
@@ -47,10 +49,7 @@ def input_into_database(requestDict, stage):
         password="R5eu12o$",
         database="capstone"
     )
-    if mydb.is_connected():
-        print("Connected")
-    else:
-        print("Not connected")
+
     mycursor = mydb.cursor()
 
     hName = requestDict.get("HospitalName")
@@ -67,22 +66,26 @@ def input_into_database(requestDict, stage):
     Nvalue = requestDict.get('Lymph')
 
     patient_gender = requestDict.get("Gender")
+    patient_id = init.patientID
+
+    # that way it always goes up and should not be the same
+    init.patientID += 1
 
     hospital_sql = "insert into Hospital(hName, hAddress) values (%s,%s)"
     hospital_values = (hName, hAddress)
-    bladder_values = (Ttype, Tvalue, Mvalue, Nvalue, stage)
-    for x in bladder_values:
-        print(x)
-    bladder_sql_stuff = "insert into Bladder(BladderClass, bladderTValue, bladderMets, bladderLymph, bladderStage, " \
-                        " values ('%s', '%s', '%s', '%s', '%s')"
 
-    mycursor.execute(hospital_sql, hospital_values)
-    mycursor.execute(bladder_sql_stuff,(bladder_values,))
+    bladder_values = (patient_id,Ttype, Tvalue, Mvalue, Nvalue, stage)
+    bladder_sql_stuff = """insert into Bladder(patientID,BladderClass, bladderTValue, bladderMets, bladderLymph, bladderStage) 
+    values (%s, %s, %s, %s, %s, %s) """
+
+    patient_sql = "insert into Patient(pGender, pID,hospitalName,hospitalAddress) values(%s,%s,%s,%s)"
+    patient_values = (patient_gender,patient_id,hName,hAddress)
+    try:
+        mycursor.execute(hospital_sql, hospital_values)
+    except mysql.connector.errors.IntegrityError:
+        pass
+    mycursor.execute(patient_sql,patient_values)
+    mycursor.execute(bladder_sql_stuff, bladder_values)
+
     mydb.commit()
 
-    mycursor.execute("Select * from hospital")
-    mycursor.execute("Select * from Bladder")
-    myresult = mycursor.fetchall()
-
-    for x in myresult:
-        print(x)
