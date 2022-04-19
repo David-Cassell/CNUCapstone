@@ -64,19 +64,13 @@ def input_into_database(requestDict, stage):
 
     # that way it always goes up and should not be the same
     init.patientID += 1
-    sql_stuff = "insert into Colon(patientID, colonClass, colonTValue, colonMets, colonLymph, colonStage)" \
-                " values (%s, %s, %s, %s, %s, %s)"
+    sql_stuff = """insert into Colon(patientID, colonClass, colonTValue, colonMets, colonLymph, colonStage)
+                 values (%s, %s, %s, %s, %s, %s)"""
     colon_values = (patient_id,classification,tValue,mets,nValue,stage)
-    hospital_sql = "insert into Hospital(hName, hAddress) values (%s,%s)"
-    hospital_values = (hName, hAddress)
 
     patient_sql = "insert into Patient(pGender, pID,hospitalName,hospitalAddress) values(%s,%s,%s,%s)"
     patient_values = (patient_gender, patient_id, hName, hAddress)
 
-    try:
-        mycursor.execute(hospital_sql, hospital_values)
-    except mysql.connector.errors.IntegrityError:
-        pass
     mycursor.execute(patient_sql, patient_values)
     mycursor.execute(sql_stuff,colon_values)
 

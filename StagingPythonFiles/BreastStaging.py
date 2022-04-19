@@ -9,9 +9,24 @@ clinical_path = r'stagingTextFiles\clinicalBreastStaging.txt'
 pathological_path = r'stagingTextFiles\pathologicalBreastStaging.txt'
 
 
-
-
 def getValues(requestDict):
+    tvalue = get_initial_T(requestDict)
+    classification = requestDict.get('type')
+    if classification == 'c':
+        nvalue = requestDict.get('Clin-Lymph')
+    else:
+        nvalue = requestDict.get('path-Lymph')
+    mets = requestDict.get('Metas')
+    grade = requestDict.get('Grade')
+    HER2 = requestDict.get('Her2')
+    ER = requestDict.get('Er')
+    PR = requestDict.get('Pr')
+    #print(classification + " " + tvalue + " " + nvalue + " " + mets + " " + grade + " " + HER2 + " " + ER + " " + PR)
+    stage = calculate(classification, tvalue, nvalue, mets, grade, HER2, ER, PR)
+    return stage
+
+
+def get_initial_T(requestDict):
     size = requestDict.get("T-Value")
 
     if "chest" in requestDict:
@@ -24,29 +39,12 @@ def getValues(requestDict):
     else:
         skin = "n"
 
-    if "suffix" in requestDict:
-        suffix = "pos"
-    else:
-        suffix = "neg"
-
     if "infla" in requestDict:
         infla = "y"
     else:
         infla = "n"
-    tvalue = size_of_tumor(size, chest, skin, infla)
-    classification = requestDict.get('type')
-    if classification == 'c':
-        nvalue = requestDict.get('Clin-Lymph')
-    else:
-        nvalue = requestDict.get('path-Lymph')
-    mets = requestDict.get('Metas')
-    grade = requestDict.get('Grade')
-    HER2 = requestDict.get('Her2')
-    ER = requestDict.get('Er')
-    PR = requestDict.get('Pr')
-    print(classification + " " + tvalue + " " + nvalue + " " + mets + " " + grade + " " + HER2 + " " + ER + " " + PR)
-    stage = calculate(classification, tvalue, nvalue, mets, grade, HER2, ER, PR)
-    return stage
+
+    return size_of_tumor(size, chest, skin, infla)
 
 
 def size_of_tumor(size, chest, skin, infla):
@@ -93,8 +91,20 @@ def input_into_database(requestDict, stage):
         host="localhost",
         user="root",
         password="R5eu12o$",
-        database = "capstone"
+        database="capstone"
     )
+
+    tvalue = get_initial_T(requestDict)
+    classification = requestDict.get('type')
+    if classification == 'c':
+        nvalue = requestDict.get('Clin-Lymph')
+    else:
+        nvalue = requestDict.get('path-Lymph')
+    mets = requestDict.get('Metas')
+    grade = requestDict.get('Grade')
+    HER2 = requestDict.get('Her2')
+    ER = requestDict.get('Er')
+    PR = requestDict.get('Pr')
 
     mycursor = mydb.cursor()
 
@@ -106,19 +116,14 @@ def input_into_database(requestDict, stage):
 
     # that way it always goes up and should not be the same
     init.patientID += 1
-    sql_stuff = "insert into Breast(breastClass, breastTValue, breastGrade, breastMets, breastLymph, breastER, " \
-                "breastHER2, breastPER, breastStage)" \
-                " values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    hospital_sql = "insert into Hospital(hName, hAddress) values (%s,%s)"
-    hospital_values = (hName, hAddress)
+    sql_stuff = """insert into Breast(patientID,breastClass, breastTValue, breastGrade, breastMets, breastLymph, breastER, 
+                breastHER2, breastPER, breastStage)
+                 values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
 
+    breast_values = (patient_id,classification,tvalue,grade,mets,nvalue,ER,HER2,PR,stage)
     patient_sql = "insert into Patient(pGender, pID,hospitalName,hospitalAddress) values(%s,%s,%s,%s)"
     patient_values = (patient_gender, patient_id, hName, hAddress)
 
-    try:
-        mycursor.execute(hospital_sql, hospital_values)
-    except mysql.connector.errors.IntegrityError:
-        pass
     mycursor.execute(patient_sql, patient_values)
 
 

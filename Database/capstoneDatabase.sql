@@ -2,7 +2,6 @@ drop database if exists capstone;
 create database capstone;
 use capstone;
 
-drop table if exists hospital;
 drop table if exists patient;
 drop table if exists breast;
 drop table if exists bladder;
@@ -10,19 +9,14 @@ drop table if exists colon;
 drop table if exists lung;
 drop table if exists prostate;
 
-create table hospital(
-	hName varchar(20),
-    hAddress varchar(20),
-    primary key(hName, hAddress)
-);
+
 
 create table Patient(
 	pGender varchar(5),
     pID int,
     hospitalName varchar(20),
     hospitalAddress varchar(20),
-    primary key (pID),
-    foreign key(hospitalName, hospitalAddress) references hospital(hName, hAddress)
+    primary key (pID)
 );
 
 create table breast(

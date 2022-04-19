@@ -21,7 +21,9 @@
 <a href="{{ url_for('lung') }}">Lung</a>
 <a href="{{ url_for('prostate') }}">Prostate</a>
 
-<h2>Patient Information</h2>
+
+<div>
+    <h2>Patient Information</h2>
     <form id="Patient" method="POST">
         <label for="Gender">What is the Gender of the patient: </label>
         <select name="Gender" id="Gender">
@@ -34,7 +36,6 @@
         <label for="HospitalAddress">Hospital Address:</label>
         <input type="text" id="HospitalAddress" name="HospitalAddress">
     </form>
-<div>
     <h2>You are currently coding a Breast Cancer Cell</h2>
     <form id="type" method="POST">
 
@@ -51,8 +52,6 @@
         <label for="skin-intrusion">Skin intrusion</label>
         <input type="checkbox" name="infla" value="infla" id="infla">
         <label for="infla">Inflammatory Carcinoma</label>
-        <input type="checkbox" name="suffix" value="suffix" id="suffix">
-        <label for="suffix">Any synchronous tumors found in a single organ</label>
         <br>
 
         <label for="Metas">Metastasis Value:</label>

@@ -51,13 +51,35 @@ def stage(classification, tValue, nValue, mets, psa, gleason):
     stagingDictionary.clear()
     return to_calculate, istage
 
+
 def input_into_database(requestDict, stage):
     mydb = mysql.connector.connect(
         host="localhost",
         user="root",
         password="R5eu12o$",
-        database = "capstone"
+        database="capstone"
     )
+
+    classification = requestDict.get("type")
+    nValue = requestDict.get('Lymph')
+    if classification == "c":
+        tValue = requestDict.get("Clin-T-Value")
+        mets = requestDict.get("Clin-Metas")
+    else:
+        tValue = requestDict.get("Path-T-Value")
+        mets = requestDict.get("Path-Metas")
+    Psa = requestDict.get("PSA-Value")
+    if Psa == "A":
+        Psa = "<10"
+    elif Psa =="B":
+        Psa = ">=10 <20"
+    elif Psa =="C":
+        Psa = "<20"
+    elif Psa == "D":
+        Psa = ">= 20"
+    else:
+        Psa = "Any Value"
+    gleason = requestDict.get("Gleason")
 
     mycursor = mydb.cursor()
     hName = requestDict.get("HospitalName")
@@ -68,17 +90,13 @@ def input_into_database(requestDict, stage):
 
     # that way it always goes up and should not be the same
     init.patientID += 1
-    sql_stuff = "insert into Prostate(ProstateClass, breastTValue, breastGrade, breastMets, breastLymph, breastER, " \
-                "breastHER2, breastPER, breastStage)" \
-                " values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    hospital_sql = "insert into Hospital(hName, hAddress) values (%s,%s)"
-    hospital_values = (hName, hAddress)
-
+    sql_stuff = """insert into Prostate(patientID, prostateClass, prostateTValue, prostateMets, prostateLymph, prostatePSA, 
+                prostateGleason, prostateStage)
+                 values (%s, %s, %s, %s, %s, %s, %s, %s)"""
+    prostate_values = (patient_id, classification, tValue, mets, nValue, Psa, gleason, stage)
     patient_sql = "insert into Patient(pGender, pID,hospitalName,hospitalAddress) values(%s,%s,%s,%s)"
     patient_values = (patient_gender, patient_id, hName, hAddress)
 
-    try:
-        mycursor.execute(hospital_sql, hospital_values)
-    except mysql.connector.errors.IntegrityError:
-        pass
     mycursor.execute(patient_sql, patient_values)
+    mycursor.execute(sql_stuff, prostate_values)
+    mydb.commit()

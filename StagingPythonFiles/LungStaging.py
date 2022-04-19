@@ -65,19 +65,14 @@ def input_into_database(requestDict, stage):
         mets = requestDict.get("Clin-Metas")
     else:
         mets = requestDict.get("Path-Metas")
-    lung_sql_stuff = "insert into Lung(patientID, lungClass, lungTValue, lungMets, lungLymph, lungStage, " \
-                     " values (%s, %s, %s, %s, %s, %s)"
+
+    lung_sql_stuff = """insert into Lung(patientID, lungClass, lungTValue, lungMets, lungLymph, lungStage) 
+                      values (%s, %s, %s, %s, %s, %s)"""
     lung_values = (patient_id, classs, tValue, mets, nValue, stage)
-    hospital_sql = "insert into Hospital(hName, hAddress) values (%s,%s)"
-    hospital_values = (hName, hAddress)
 
     patient_sql = "insert into Patient(pGender, pID,hospitalName,hospitalAddress) values(%s,%s,%s,%s)"
     patient_values = (patient_gender, patient_id, hName, hAddress)
 
-    try:
-        mycursor.execute(hospital_sql, hospital_values)
-    except mysql.connector.errors.IntegrityError:
-        pass
     mycursor.execute(patient_sql, patient_values)
     mycursor.execute(lung_sql_stuff, lung_values)
 
