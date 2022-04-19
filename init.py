@@ -75,7 +75,6 @@ def lung():
 def prostate():
 
     if request.method == 'POST':
-        # print(request.form)
         requestDict = request.form
         stage = ProstateStaging.getValues(requestDict)
         ProstateStaging.input_into_database(requestDict, stage[1])
@@ -114,7 +113,7 @@ def displayAll():
                      "colon.colonClass, colon.colonTValue, colon.colonMets, colon.colonLymph, "
                      "colon.colonStage from patient RIGHT JOIN Colon ON patient.pID = colon.patientID")
     Colon_data = mycursor.fetchall()
-
+    mydb.commit()
     return render_template('displayAll.html', Bladder_data=Bladder_data, Prostate_data=Prostate_data,
                            Lung_data=Lung_data, Breast_data=Breast_data, Colon_data=Colon_data)
 
