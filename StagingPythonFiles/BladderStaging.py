@@ -52,8 +52,8 @@ def input_into_database(requestDict, stage):
 
     mycursor = mydb.cursor()
 
-    hName = requestDict.get("HospitalName")
-    hAddress = requestDict.get("HospitalAddress")
+    hName = requestDict.get("HospitalName", "Not given")
+    hAddress = requestDict.get("HospitalAddress", "Not Given")
 
     Ttype = requestDict.get('type')
     Tvalue = requestDict.get('T-Value')

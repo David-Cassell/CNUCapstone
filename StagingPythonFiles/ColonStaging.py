@@ -56,8 +56,8 @@ def input_into_database(requestDict, stage):
         mets = requestDict.get("Path-Metas")
 
     mycursor = mydb.cursor()
-    hName = requestDict.get("HospitalName")
-    hAddress = requestDict.get("HospitalAddress")
+    hName = requestDict.get("HospitalName", "Not given")
+    hAddress = requestDict.get("HospitalAddress", "Not Given")
 
     patient_gender = requestDict.get("Gender")
     patient_id = init.patientID
