@@ -39,6 +39,7 @@ def stage(tValue, nValue, mets):
     stagingDictionary.clear()
     return to_calculate, istage
 
+
 def input_into_database(requestDict, stage):
     mydb = mysql.connector.connect(
         host="localhost",
@@ -66,12 +67,12 @@ def input_into_database(requestDict, stage):
     init.patientID += 1
     sql_stuff = """insert into Colon(patientID, colonClass, colonTValue, colonMets, colonLymph, colonStage)
                  values (%s, %s, %s, %s, %s, %s)"""
-    colon_values = (patient_id,classification,tValue,mets,nValue,stage)
+    colon_values = (patient_id, classification, tValue, mets, nValue, stage)
 
     patient_sql = "insert into Patient(pGender, pID,hospitalName,hospitalAddress) values(%s,%s,%s,%s)"
     patient_values = (patient_gender, patient_id, hName, hAddress)
 
     mycursor.execute(patient_sql, patient_values)
-    mycursor.execute(sql_stuff,colon_values)
+    mycursor.execute(sql_stuff, colon_values)
 
     mydb.commit()

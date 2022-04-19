@@ -21,18 +21,18 @@
 <a href="{{ url_for('lung') }}">Lung</a>
 <a href="{{ url_for('prostate') }}">Prostate</a>
 <h2>Patient Information</h2>
-    <form id="Patient" method="POST">
-        <label for="Gender">What is the Gender of the patient: </label>
-        <select name="Gender" id="Gender">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other/Non-Binary</option>
-        </select><br>
-        <label for="HospitalName">Hospital Name:</label>
-        <input type="text" id="HospitalName" name="HospitalName"><br>
-        <label for="HospitalAddress">Hospital Address:</label>
-        <input type="text" id="HospitalAddress" name="HospitalAddress">
-    </form>
+<form id="Patient" method="POST">
+    <label for="Gender">What is the Gender of the patient: </label>
+    <select name="Gender" id="Gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other/Non-Binary</option>
+    </select><br>
+    <label for="HospitalName">Hospital Name:</label>
+    <input type="text" id="HospitalName" name="HospitalName"><br>
+    <label for="HospitalAddress">Hospital Address:</label>
+    <input type="text" id="HospitalAddress" name="HospitalAddress">
+</form>
 <div>
     <h2>You are currently coding a Prostate Cancer Cell</h2>
     <form id="type" method="POST">
@@ -45,7 +45,7 @@
             <option value="TX">Primary tumor cannot be assessed</option>
             <option value="T0">No Evidence of primary tumor</option>
             <option value="Tis">Carcinoma in situ, squamous cell carcinoma</option>
-            <option value="T1" >Tumor <=3 cm in the greatest dimension,
+            <option value="T1">Tumor <=3 cm in the greatest dimension,
                 surrounded by lung or visceral pleura, without
                 bronchoscopic evidence of invasion more proximal than the lobar bronchus
             </option>
@@ -56,9 +56,11 @@
             <option value="T1b">Tumor >1cm but <=2cm in greatest dimension</option>
             <option value="T1c">Tumor >2cm but <=3cm in greatest dimension</option>
             <option value="T2">Tumor >3cm but <=5cm or Involves the main bronchus regardless of distance to carina, but
-                without involvment of the carina</option>
+                without involvment of the carina
+            </option>
             <option value="T2"> Tumor invades PL1 or PL2; associated with the atelectasis or obstructive
-                pnuemonitis that extends to the hilar region</option>
+                pnuemonitis that extends to the hilar region
+            </option>
 
             <option value="T2a">Tumor >3cm but <=4cm OR size cannot be determined</option>
             <option value="T2b">Tumor >4cm but <=5cm</option>
@@ -73,9 +75,13 @@
         <select name="Path-T-Value" id="Path-T-Value">
             <option value="T2">Organ Confirmed</option>
             <option value="T3">Extraprostatic extension</option>
-            <option value="T3a">Extraprostatic extension (unilateral or bilateral) or microscopic invasion of bladder neck</option>
+            <option value="T3a">Extraprostatic extension (unilateral or bilateral) or microscopic invasion of bladder
+                neck
+            </option>
             <option value="T3b">Tumor invades seminal vesicle(s)</option>
-            <option value="T4">Tumor is fixed or invades adjacent structures other than seminal vesicles such as external sphincter, rectum, bladder, levator muscles, and/or pelvic wall</option>
+            <option value="T4">Tumor is fixed or invades adjacent structures other than seminal vesicles such as
+                external sphincter, rectum, bladder, levator muscles, and/or pelvic wall
+            </option>
         </select>
 
         <br>
@@ -114,7 +120,7 @@
 
         </select>
         <br>
-         <label for="PSA-Value">PSA Value:</label>
+        <label for="PSA-Value">PSA Value:</label>
         <select name="PSA-Value" id="PSA-Value">
             <option value="A">Less than 10</option>
             <option value="B">Greater than equal 10 less than 20</option>
@@ -123,7 +129,7 @@
             <option value="E">Any/not known</option>
         </select>
         <br>
-         <label for="Gleason">Gleason Score and Grade:</label>
+        <label for="Gleason">Gleason Score and Grade:</label>
         <select name="Gleason" id="Gleason">
             <option value="1">Less than or equal to 6; with a pattern of <=3+3</option>
             <option value="2">Score of 7 with a pattern of 3+4</option>
@@ -136,11 +142,11 @@
     </form>
 
 </div>
-    {% if toStage %}
-    <p>You staged: {{toStage}}</p>
-    {% endif %}
-    {% if stage %}
-    <p>Which resulted in a stage {{stage}} cancer cell in this person</p>
-    {% endif %}
+{% if toStage %}
+<p>You staged: {{toStage}}</p>
+{% endif %}
+{% if stage %}
+<p>Which resulted in a stage {{stage}} cancer cell in this person</p>
+{% endif %}
 </body>
 </html>

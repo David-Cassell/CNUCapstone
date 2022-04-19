@@ -6,13 +6,14 @@ patientID = 1
 app = Flask(__name__)
 
 mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="R5eu12o$",
-        database="capstone"
-    )
+    host="localhost",
+    user="root",
+    password="R5eu12o$",
+    database="capstone"
+)
 
 mycursor = mydb.cursor(buffered=True)
+
 
 @app.route('/')
 def home():
@@ -38,7 +39,6 @@ def bladder():
 
 @app.route('/breast', methods=['GET', 'POST'])
 def breast():
-
     if request.method == 'POST':
         # print(request.form)
         requestDict = request.form
@@ -61,7 +61,6 @@ def colon():
 
 @app.route('/lung', methods=['GET', 'POST'])
 def lung():
-
     if request.method == 'POST':
         # print(request.form)
         requestDict = request.form
@@ -73,7 +72,6 @@ def lung():
 
 @app.route('/prostate', methods=['GET', 'POST'])
 def prostate():
-
     if request.method == 'POST':
         requestDict = request.form
         stage = ProstateStaging.getValues(requestDict)

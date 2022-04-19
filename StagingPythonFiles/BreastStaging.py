@@ -21,7 +21,7 @@ def getValues(requestDict):
     HER2 = requestDict.get('Her2')
     ER = requestDict.get('Er')
     PR = requestDict.get('Pr')
-    #print(classification + " " + tvalue + " " + nvalue + " " + mets + " " + grade + " " + HER2 + " " + ER + " " + PR)
+    # print(classification + " " + tvalue + " " + nvalue + " " + mets + " " + grade + " " + HER2 + " " + ER + " " + PR)
     stage = calculate(classification, tvalue, nvalue, mets, grade, HER2, ER, PR)
     return stage
 
@@ -120,7 +120,7 @@ def input_into_database(requestDict, stage):
                 breastHER2, breastPER, breastStage)
                  values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
 
-    breast_values = (patient_id,classification,tvalue,grade,mets,nvalue,ER,HER2,PR,stage)
+    breast_values = (patient_id, classification, tvalue, grade, mets, nvalue, ER, HER2, PR, stage)
     patient_sql = "insert into Patient(pGender, pID,hospitalName,hospitalAddress) values(%s,%s,%s,%s)"
     patient_values = (patient_gender, patient_id, hName, hAddress)
 

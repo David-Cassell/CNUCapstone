@@ -71,9 +71,9 @@ def input_into_database(requestDict, stage):
     Psa = requestDict.get("PSA-Value")
     if Psa == "A":
         Psa = "<10"
-    elif Psa =="B":
+    elif Psa == "B":
         Psa = ">=10 <20"
-    elif Psa =="C":
+    elif Psa == "C":
         Psa = "<20"
     elif Psa == "D":
         Psa = ">= 20"
@@ -82,7 +82,7 @@ def input_into_database(requestDict, stage):
     gleason = requestDict.get("Gleason")
 
     mycursor = mydb.cursor()
-    hName = requestDict.get("HospitalName","Not given")
+    hName = requestDict.get("HospitalName", "Not given")
     hAddress = requestDict.get("HospitalAddress", "Not Given")
 
     patient_gender = requestDict.get("Gender")

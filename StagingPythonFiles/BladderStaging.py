@@ -28,16 +28,16 @@ def read_in(fileToRead):
         dictStage = line.split(":")
         stagingDictionary.update({dictStage[0]: dictStage[1]})
         # print(stagingDictionary)
-    #print("it was read")
+    # print("it was read")
     file.close()
 
 
 def stage(TValue, NValue, MValue):
     read_in(path)
     to_calculate = TValue + NValue + MValue
-    #print(to_calculate)
+    # print(to_calculate)
     stage = stagingDictionary.get(to_calculate, "0")
-    #print(stage)
+    # print(stage)
     stagingDictionary.clear()
     return to_calculate, stage
 
@@ -71,15 +71,14 @@ def input_into_database(requestDict, stage):
     # that way it always goes up and should not be the same
     init.patientID += 1
 
-    bladder_values = (patient_id,Ttype, Tvalue, Mvalue, Nvalue, stage)
+    bladder_values = (patient_id, Ttype, Tvalue, Mvalue, Nvalue, stage)
     bladder_sql_stuff = """insert into Bladder(patientID,BladderClass, bladderTValue, bladderMets, bladderLymph, bladderStage) 
     values (%s, %s, %s, %s, %s, %s) """
 
     patient_sql = "insert into Patient(pGender, pID,hospitalName,hospitalAddress) values(%s,%s,%s,%s)"
-    patient_values = (patient_gender,patient_id,hName,hAddress)
+    patient_values = (patient_gender, patient_id, hName, hAddress)
 
-    mycursor.execute(patient_sql,patient_values)
+    mycursor.execute(patient_sql, patient_values)
     mycursor.execute(bladder_sql_stuff, bladder_values)
 
     mydb.commit()
-
