@@ -12,10 +12,10 @@ drop table if exists prostate;
 
 
 create table Patient(
-	pGender varchar(5),
+	pGender varchar(20),
     pID int,
     hospitalName varchar(20),
-    hospitalAddress varchar(20),
+    hospitalAddress varchar(1000),
     primary key (pID)
 );
 
@@ -71,5 +71,6 @@ create table prostate(
     prostateLymph varchar(15),
     prostatePSA varchar(15),
     prostateGleason varchar(15),
+    prostateStage varchar(15),
     foreign key(patientID) references patient (pID)
 );
