@@ -44,7 +44,7 @@
         <input type="radio" name="type" id="path" value="p">
         <label for="path">Pathological</label><br>
         <label for="T-Value">T-Value</label>
-        <select name="T-Value" id="T-Value">
+        <select name="T-Value" id="T-Value" style="width: 50%;">
             <option value="TX">Primary tumor cannot be assessed</option>
             <option value="T0">No Evidence of primary tumor</option>
             <option value="Tis">Carcinoma in situ, squamous cell carcinoma</option>
@@ -58,23 +58,25 @@
             <option value="T1b">Tumor >1cm but <=2cm in greatest dimension</option>
             <option value="T1c">Tumor >2cm but <=3cm in greatest dimension</option>
             <option value="T2">Tumor >3cm but <=5cm or Involves the main bronchus regardless of distance to carina, but
-                without involvment of the carina; invades PL1 or PL2; associated with the atelectasis or obstructive
+                without involvment of the carina; invades PL1 or PL2</option>
+            <option value="T2">Tumor associated with the atelectasis or obstructive
                 pnuemonitis that extends to the hilar region
             </option>
             <option value="T2a">Tumor >3cm but <=4cm OR size cannot be determined</option>
             <option value="T2b">Tumor >4cm but <=5cm</option>
             <option value="T3">Tumor >5cm but <=7cm or directly invading any of the following: PL3, chest wall, phrenic
-                nerve, parietal pericardium; or separate tumor nodules in the same lobe as the primary
+                nerve, parietal pericardium; </option>
+            <option value="T3">Tumor >5cm but <=7cm or separate tumor nodules in the same lobe as the primary
             </option>
-            <option value="T4">Tumor >7cm OR tumor of any size invading one or more of: diaphragm, mediastinum, heart,
-                great vessels, trachea, recurrent laryngeal nerve, esophagus, vertebral body or carina
+            <option value="T4">Tumor >7cm OR tumor of any size invading one or more of: diaphragm, mediastinum heart, great vessels or trachea</option>
+             <option value="T4">Tumor >7cm OR tumor of any size invading one or more of: recurrent laryngeal nerve, esophagus, vertebral body or carina
             </option>
         </select>
 
         <br>
 
         <label for="Clin-Metas">Clinical Metastasis Value:</label>
-        <select name="Clin-Metas" id="Clin-Metas" style='width:10%;'>
+        <select name="Clin-Metas" id="Clin-Metas" style="width: 50%;">
             <option value="M0">No distant metastasis
             </option>
             <option value="M1">Distant Metastasis
@@ -89,11 +91,12 @@
         </select>
         <br>
         <label for="Path-Metas">Pathological Metastasis Value:</label>
-        <select name="Path-Metas" id="Path-Metas" style='width:10%;'>
+        <select name="Path-Metas" id="Path-Metas" style="width: 50%;">
             <option value="M1">Distant metastasis, microscopically confirmed
             </option>
             <option value="M1a">Separate tumor nodule(s) in contralateral lobe tumor with pleural or pericardial nodules
-                or malignant pleural or pericadial effusion, microscopically confimed
+            </option>
+            <option value="M1a">malignant pleural or pericadial effusion, microscopically confimed
             </option>
             <option value="M1b">Single extrathoracic metastasis in a single organ, microscopically confirmed
             </option>
