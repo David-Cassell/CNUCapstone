@@ -125,7 +125,7 @@ def input_into_database(requestDict, stage):
     patient_values = (patient_gender, patient_id, hName, hAddress)
 
     mycursor.execute(patient_sql, patient_values)
-
+    mycursor.execute(sql_stuff, breast_values)
 
 def read_in(fileToRead):
     file = open(fileToRead, encoding="utf-8")
